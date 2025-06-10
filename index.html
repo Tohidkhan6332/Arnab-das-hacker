@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arnab Das | Elite Ethical Hacker</title>
+    <title>Arnab Das | Ethical Hacker & Security Researcher</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Ubuntu+Mono&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
         
         :root {
-            --matrix-green: #00ff41;
-            --hacker-green: #00ff9d;
-            --dark-bg: #0a0a0a;
-            --darker-bg: #020202;
-            --terminal-bg: #0d0208;
-            --glow: 0 0 10px var(--matrix-green);
+            --primary: #0f0;
+            --secondary: #00a8ff;
+            --dark: #111;
+            --darker: #0a0a0a;
+            --light: #ccc;
         }
         
         * {
@@ -23,632 +22,761 @@
         }
         
         body {
-            background-color: var(--darker-bg);
-            color: var(--matrix-green);
-            font-family: 'Ubuntu Mono', monospace;
-            line-height: 1.6;
+            font-family: 'Share Tech Mono', monospace;
+            background-color: var(--dark);
+            color: var(--primary);
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(0, 255, 65, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(0, 255, 157, 0.05) 0%, transparent 20%);
+                radial-gradient(circle at 10% 20%, rgba(0, 255, 0, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 168, 255, 0.05) 0%, transparent 20%);
         }
         
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Header Styles */
-        header {
-            padding: 30px 0;
-            position: relative;
-            border-bottom: 1px solid rgba(0, 255, 65, 0.3);
-        }
-        
-        .logo {
-            font-family: 'Major Mono Display', monospace;
-            font-size: 2.5rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            color: transparent;
-            background: linear-gradient(90deg, var(--matrix-green), var(--hacker-green));
-            -webkit-background-clip: text;
-            background-clip: text;
-            text-shadow: var(--glow);
-            position: relative;
-            display: inline-block;
-        }
-        
-        .logo::after {
-            content: '_';
-            animation: blink 1s step-end infinite;
-            position: absolute;
-            right: -15px;
-        }
-        
-        nav ul {
+        .terminal-bar {
+            background-color: var(--darker);
+            padding: 5px 15px;
             display: flex;
-            list-style: none;
-            margin-top: 20px;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--primary);
         }
         
-        nav ul li {
-            margin-right: 30px;
-        }
-        
-        nav ul li a {
-            color: var(--matrix-green);
-            text-decoration: none;
-            font-size: 1.2rem;
-            position: relative;
-            padding: 5px 0;
-        }
-        
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: var(--hacker-green);
-            transition: width 0.3s ease;
-        }
-        
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-        
-        /* Hero Section */
-        .hero {
+        .terminal-controls {
             display: flex;
-            align-items: center;
-            min-height: 80vh;
-            padding: 50px 0;
+            gap: 10px;
         }
         
-        .hero-content {
-            flex: 1;
-            padding-right: 50px;
-        }
-        
-        .hero-title {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            line-height: 1.2;
-            font-family: 'Major Mono Display', monospace;
-            background: linear-gradient(90deg, var(--matrix-green), var(--hacker-green));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .hero-subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            color: rgba(0, 255, 65, 0.8);
-        }
-        
-        .hero-description {
-            font-size: 1.1rem;
-            margin-bottom: 40px;
-            color: rgba(200, 255, 200, 0.7);
-            max-width: 600px;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background: transparent;
-            color: var(--matrix-green);
-            border: 1px solid var(--matrix-green);
-            text-decoration: none;
-            font-size: 1.1rem;
-            margin-right: 15px;
-            margin-bottom: 15px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.2), transparent);
-            transition: 0.5s;
-        }
-        
-        .btn:hover {
-            background-color: rgba(0, 255, 65, 0.1);
-            box-shadow: var(--glow);
-        }
-        
-        .btn:hover::before {
-            left: 100%;
-        }
-        
-        .btn-primary {
-            background-color: var(--matrix-green);
-            color: var(--darker-bg);
-            font-weight: bold;
-        }
-        
-        .btn-primary:hover {
-            background-color: var(--hacker-green);
-            color: var(--darker-bg);
-        }
-        
-        .hero-image {
-            flex: 1;
-            position: relative;
-            perspective: 1000px;
-        }
-        
-        .hexagon {
-            width: 400px;
-            height: 450px;
-            background: var(--terminal-bg);
-            position: relative;
-            margin: 0 auto;
-            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-            border: 1px solid var(--matrix-green);
-            box-shadow: var(--glow);
-            transition: all 0.5s ease;
-            transform-style: preserve-3d;
-        }
-        
-        .hexagon:hover {
-            transform: rotateY(10deg) rotateX(5deg);
-            box-shadow: 0 0 30px var(--matrix-green);
-        }
-        
-        .hexagon img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-            opacity: 0.9;
-            filter: grayscale(30%) contrast(120%) brightness(0.8);
-        }
-        
-        /* Terminal Section */
-        .terminal-container {
-            background-color: var(--terminal-bg);
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
-            margin: 80px 0;
-            overflow: hidden;
-        }
-        
-        .terminal-header {
-            background-color: #1a1a1a;
-            padding: 10px 15px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .terminal-button {
+        .control {
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            margin-right: 8px;
         }
         
-        .terminal-button.red {
-            background-color: #ff5f56;
-        }
-        
-        .terminal-button.yellow {
-            background-color: #ffbd2e;
-        }
-        
-        .terminal-button.green {
-            background-color: #27c93f;
-        }
+        .close { background-color: #ff5f56; }
+        .minimize { background-color: #ffbd2e; }
+        .maximize { background-color: #27c93f; }
         
         .terminal-title {
-            flex-grow: 1;
+            font-size: 0.8rem;
+        }
+        
+        header {
+            padding: 2rem;
             text-align: center;
-            color: rgba(200, 255, 200, 0.7);
-            font-size: 0.9rem;
-        }
-        
-        .terminal-body {
-            padding: 20px;
-            font-family: 'Ubuntu Mono', monospace;
-            min-height: 200px;
-        }
-        
-        .command-line {
-            display: flex;
-            margin-bottom: 10px;
-        }
-        
-        .prompt {
-            color: var(--hacker-green);
-            margin-right: 10px;
-        }
-        
-        .command {
-            color: var(--matrix-green);
-        }
-        
-        .output {
-            color: rgba(200, 255, 200, 0.7);
-            margin-left: 30px;
-            margin-bottom: 15px;
-        }
-        
-        .cursor {
-            display: inline-block;
-            width: 10px;
-            height: 20px;
-            background-color: var(--matrix-green);
-            animation: blink 1s step-end infinite;
-            vertical-align: middle;
-            margin-left: 5px;
-        }
-        
-        /* Video Section */
-        .video-section {
-            margin: 80px 0;
-            text-align: center;
-        }
-        
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            font-family: 'Major Mono Display', monospace;
             position: relative;
-            display: inline-block;
         }
         
-        .section-title::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            bottom: -10px;
-            left: 0;
-            background: linear-gradient(90deg, transparent, var(--matrix-green), transparent);
-        }
-        
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            height: 0;
-            overflow: hidden;
-            border: 1px solid var(--matrix-green);
-            box-shadow: var(--glow);
-            border-radius: 8px;
-            margin-bottom: 30px;
-        }
-        
-        .video-wrapper iframe {
+        .matrix-bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            border: none;
+            z-index: -1;
+            opacity: 0.1;
         }
         
-        /* Music Player */
-        .music-player {
-            background-color: var(--terminal-bg);
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid var(--matrix-green);
-            box-shadow: var(--glow);
-            max-width: 500px;
-            margin: 0 auto;
-            text-align: center;
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid var(--primary);
+            object-fit: cover;
+            margin-bottom: 1rem;
+            box-shadow: 0 0 20px var(--primary);
         }
         
-        .music-title {
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px var(--primary);
+        }
+        
+        .tagline {
+            color: var(--secondary);
             font-size: 1.2rem;
-            margin-bottom: 15px;
-            color: var(--hacker-green);
+            margin-bottom: 1rem;
         }
         
-        .music-controls {
+        .typing-text {
+            border-right: 2px solid var(--primary);
+            animation: blink 0.75s step-end infinite;
+            display: inline-block;
+        }
+        
+        @keyframes blink {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--primary); }
+        }
+        
+        nav {
             display: flex;
             justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        section {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, var(--secondary), transparent);
+        }
+        
+        p {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            color: var(--light);
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin: 2rem 0;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 20px var(--primary);
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .social-link {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 0.5rem;
         }
         
-        .music-btn {
-            background: none;
-            border: 1px solid var(--matrix-green);
-            color: var(--matrix-green);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .social-link:hover {
+            color: var(--primary);
+            transform: translateY(-3px);
         }
         
-        .music-btn:hover {
-            background-color: rgba(0, 255, 65, 0.2);
-            box-shadow: var(--glow);
+        .social-link i {
+            font-size: 1.5rem;
         }
         
-        /* Gallery Section */
         .gallery {
-            margin: 80px 0;
-        }
-        
-        .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
         }
         
         .gallery-item {
             position: relative;
             overflow: hidden;
-            border-radius: 8px;
-            height: 250px;
-            border: 1px solid rgba(0, 255, 65, 0.3);
-            transition: all 0.5s ease;
+            border: 1px solid var(--primary);
+            height: 200px;
+            transition: all 0.3s;
         }
         
         .gallery-item:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--glow);
-            border-color: var(--matrix-green);
+            transform: scale(1.03);
+            box-shadow: 0 0 15px var(--primary);
         }
         
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
-            filter: grayscale(50%) contrast(120%) brightness(0.7);
+            transition: transform 0.5s;
         }
         
         .gallery-item:hover img {
             transform: scale(1.1);
-            filter: grayscale(20%) contrast(120%) brightness(0.8);
         }
         
         .gallery-caption {
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 0.5rem;
             color: white;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            transform: translateY(100%);
+            transition: transform 0.3s;
         }
         
         .gallery-item:hover .gallery-caption {
-            opacity: 1;
+            transform: translateY(0);
         }
         
-        /* Social Media Section */
-        .social-section {
-            margin: 80px 0;
-            text-align: center;
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 40px;
-        }
-        
-        .social-link {
-            display: flex;
-            align-items: center;
-            padding: 12px 25px;
-            background-color: rgba(10, 10, 10, 0.8);
-            border-radius: 30px;
-            text-decoration: none;
-            color: var(--matrix-green);
-            border: 1px solid rgba(0, 255, 65, 0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .social-link:hover {
-            background-color: rgba(0, 255, 65, 0.1);
-            box-shadow: var(--glow);
-            border-color: var(--matrix-green);
-            transform: translateY(-3px);
-        }
-        
-        .social-link i {
-            margin-right: 10px;
-            font-size: 1.2rem;
-        }
-        
-        /* Footer */
         footer {
             text-align: center;
-            padding: 40px 0;
-            margin-top: 80px;
-            border-top: 1px solid rgba(0, 255, 65, 0.3);
+            padding: 2rem;
+            border-top: 1px solid var(--primary);
+            margin-top: 2rem;
+            color: var(--light);
         }
         
-        .footer-text {
-            color: rgba(200, 255, 200, 0.7);
+        .command {
+            color: var(--secondary);
+        }
+        
+        .blink {
+            animation: blink 1s infinite;
+        }
+
+        /* Terminal Window Styles */
+        .terminal-window {
+            background-color: var(--darker);
+            border: 1px solid var(--primary);
+            border-radius: 5px;
+            width: 90%;
+            max-width: 800px;
+            margin: 2rem auto;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            max-height: 80vh;
+            flex-direction: column;
+        }
+
+        .terminal-content {
+            padding: 15px;
+            overflow-y: auto;
+            flex-grow: 1;
+            font-family: 'Share Tech Mono', monospace;
             font-size: 0.9rem;
+            line-height: 1.4;
         }
-        
-        /* Animations */
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+
+        .terminal-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid var(--primary);
+            background-color: var(--dark);
         }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+
+        .terminal-prompt {
+            color: var(--primary);
+            margin-right: 10px;
         }
-        
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .hero {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .hero-content {
-                padding-right: 0;
-                margin-bottom: 50px;
-            }
-            
-            .hero-description {
-                margin-left: auto;
-                margin-right: auto;
-            }
-            
-            .btn-container {
-                justify-content: center;
-            }
+
+        #terminal-command {
+            background: transparent;
+            border: none;
+            color: var(--light);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.9rem;
+            width: 100%;
+            outline: none;
         }
-        
+
+        .terminal-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary);
+            color: var(--dark);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 15px var(--primary);
+            z-index: 999;
+        }
+
+        .terminal-toggle i {
+            font-size: 1.5rem;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(37, 211, 102, 0.5);
+            z-index: 999;
+        }
+
+        .whatsapp-float i {
+            font-size: 1.5rem;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            display: none;
+        }
+
         @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.5rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.2rem;
-            }
-            
-            .section-title {
+            h1 {
                 font-size: 2rem;
             }
             
-            .hexagon {
-                width: 300px;
-                height: 350px;
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            nav {
+                gap: 1rem;
+            }
+            
+            section {
+                padding: 1rem;
+            }
+
+            .terminal-window {
+                width: 95%;
             }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="logo">Arnab Das</div>
-            <nav>
-                <ul>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#video">Hacking Demo</a></li>
-                    <li><a href="#gallery">Gallery</a></li>
-                    <li><a href="#social">Connect</a></li>
-                </ul>
-            </nav>
-        </header>
+    <div class="terminal-bar">
+        <div class="terminal-controls">
+            <div class="control close"></div>
+            <div class="control minimize"></div>
+            <div class="control maximize"></div>
+        </div>
+        <div class="terminal-title">arnab@das:~</div>
+        <div></div>
+    </div>
+    
+    <header>
+        <canvas id="matrix" class="matrix-bg"></canvas>
+        <img src="https://files.catbox.moe/h3w36q.jpg" alt="Arnab Das" class="profile-img">
+        <h1>ARNAB DAS</h1>
+        <p class="tagline">Ethical Hacker | Security Researcher | Penetration Tester</p>
+        <p><span class="typing-text">$ whoami</span></p>
+    </header>
+    
+    <nav>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    
+    <section id="about">
+        <h2>About Me</h2>
+        <p>Welcome to my digital domain. I'm Arnab Das, a cybersecurity professional with a passion for ethical hacking and securing digital infrastructures.</p>
+        <p>With years of experience in penetration testing, vulnerability assessment, and security research, I help organizations identify and mitigate security risks before they can be exploited by malicious actors.</p>
+        <p>My philosophy: <span class="command">"To beat a hacker, you need to think like one."</span></p>
         
-        <section id="about" class="hero">
-            <div class="hero-content">
-                <h1 class="hero-title">CYBER SECURITY EXPERT</h1>
-                <h2 class="hero-subtitle">Ethical Hacker | Penetration Tester | Security Researcher</h2>
-                <p class="hero-description">
-                    I specialize in identifying vulnerabilities and securing systems against cyber threats. 
-                    With advanced skills in penetration testing and digital forensics, I help organizations 
-                    protect their critical assets from malicious attacks.
-                </p>
-                <div class="btn-container">
-                    <a href="#contact" class="btn btn-primary">HIRE ME</a>
-                    <a href="#skills" class="btn">MY SKILLS</a>
-                </div>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/pzGMmQ-Dg0M?autoplay=1&mute=1&loop=1&controls=0&playlist=pzGMmQ-Dg0M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </section>
+    
+    <section id="skills">
+        <h2>My Skills</h2>
+        <p><span class="command">$ skills --list</span></p>
+        <p>> Penetration Testing (Web, Network, Mobile)</p>
+        <p>> Vulnerability Assessment</p>
+        <p>> Reverse Engineering</p>
+        <p>> Malware Analysis</p>
+        <p>> Digital Forensics</p>
+        <p>> Secure Coding Practices</p>
+        <p>> Cryptography</p>
+        <p>> Network Security</p>
+        <p>> Security Tool Development</p>
+    </section>
+    
+    <section id="projects">
+        <h2>Notable Projects</h2>
+        <p><span class="command">$ cat projects.txt</span></p>
+        <p>> <strong>SecureAuth Framework</strong> - Developed a multi-factor authentication system resistant to common attacks</p>
+        <p>> <strong>VulnScan Pro</strong> - Automated vulnerability scanner with advanced detection capabilities</p>
+        <p>> <strong>CryptoShield</strong> - Encryption tool with military-grade algorithms</p>
+        <p>> <strong>DarkWeb Monitor</strong> - Tool to track potential data leaks and compromised credentials</p>
+        <p>> <strong>Pentest Toolkit</strong> - Custom collection of penetration testing scripts and utilities</p>
+    </section>
+    
+    <section id="gallery">
+        <h2>Hacking Gallery</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Hacking Setup">
+                <div class="gallery-caption">My Hacking Setup</div>
             </div>
-            <div class="hero-image">
-                <div class="hexagon">
-                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Arnab Das - Hacker">
-                </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Code Screen">
+                <div class="gallery-caption">Reverse Engineering Session</div>
             </div>
-        </section>
-        
-        <div class="terminal-container">
-            <div class="terminal-header">
-                <div class="terminal-button red"></div>
-                <div class="terminal-button yellow"></div>
-                <div class="terminal-button green"></div>
-                <div class="terminal-title">root@arnabdas:~</div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Security Conference">
+                <div class="gallery-caption">Speaking at DEF CON</div>
             </div>
-            <div class="terminal-body">
-                <div class="command-line">
-                    <span class="prompt">$</span>
-                    <span class="command">whoami</span>
-                </div>
-                <div class="output">arnabdas - Ethical Hacker - Security Consultant</div>
-                
-                <div class="command-line">
-                    <span class="prompt">$</span>
-                    <span class="command">nmap --version</span>
-                </div>
-                <div class="output">Nmap 7.92 ( https://nmap.org )</div>
-                
-                <div class="command-line">
-                    <span class="prompt">$</span>
-                    <span class="command">cat skills.txt</span>
-                </div>
-                <div class="output">
-                    Penetration Testing<br>
-                    Network Security<br>
-                    Web Application Security<br>
-                    Cryptography<br>
-                    Malware Analysis<br>
-                    Digital Forensics
-                </div>
-                
-                <div class="command-line">
-                    <span class="prompt">$</span>
-                    <span class="command">_<span class="cursor"></span></span>
-                </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Cyber Security">
+                <div class="gallery-caption">Security Research</div>
             </div>
         </div>
+    </section>
+    
+    <section id="contact">
+        <h2>Contact & Social</h2>
+        <p>Want to discuss security, collaborate on a project, or need consultation?</p>
+        <p><span class="command">$ contact --social</span></p>
         
-        <section id="video" class="video-section">
-            <h2 class="section-title">HACKING DEMONSTRATION</h2>
-            <div class="video-wrapper">
-                <!-- HOW TO ADD YOUR VIDEO -->
-                <!-- 
-                    Replace this iframe with your own video by:
-                    1. Upload your video to YouTube or another hosting service
-                    2. Get the embed code or URL
-                    3. Replace the src attribute below with your video URL
-                    4. Keep the same iframe structure
-                -->
-                <iframe src="https://www.youtube.com/embed/pzGMmQ-Dg0M" allowfullscreen></iframe>
+        <div class="social-links">
+            <a href="https://twitter.com/arnabdas" class="social-link" target="_blank">
+                <i class="fab fa-twitter"></i> Twitter
+            </a>
+            <a href="https://github.com/arnabdas" class="social-link" target="_blank">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="https://linkedin.com/in/arnabdas" class="social-link" target="_blank">
+                <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+            <a href="https://instagram.com/arnab_086" class="social-link" target="_blank">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+            <a href="mailto:arnab@example.com" class="social-link">
+                <i class="fas fa-envelope"></i> Email
+            </a>
+        </div>
+    </section>
+    
+    <footer>
+        <p>© 2025 Arnab Das. All rights reserved.</p>
+        <p>Last login: <span id="datetime"></span> from 192.168.1.101</p>
+        <p class="blink">_</p>
+    </footer>
+
+    <!-- Terminal Window -->
+    <div class="overlay" id="terminal-overlay"></div>
+    <div class="terminal-window" id="terminal-window">
+        <div class="terminal-bar">
+            <div class="terminal-controls">
+                <div class="control close" id="terminal-close"></div>
+                <div class="control minimize"></div>
+                <div class="control maximize"></div>
             </div>
+            <div class="terminal-title">terminal@arnab:~</div>
+            <div></div>
+        </div>
+        <div class="terminal-content" id="terminal-content">
+            <p>Welcome to Arnab's interactive terminal!</p>
+            <p>Type 'help' to see available commands.</p>
+            <p>> <span id="terminal-output"></span></p>
+        </div>
+        <div class="terminal-input">
+            <span class="terminal-prompt">$</span>
+            <input type="text" id="terminal-command" autocomplete="off" placeholder="Type command...">
+        </div>
+    </div>
+
+    <!-- Terminal Toggle Button -->
+    <div class="terminal-toggle" id="terminal-toggle">
+        <i class="fas fa-terminal"></i>
+    </div>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/919876543210" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+    <script>
+        // Matrix background effect
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+        
+        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const nums = '0123456789';
+        const symbols = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
+        
+        const alphabet = katakana + latin + nums + symbols;
+        
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        
+        const rainDrops = [];
+        
+        for (let x = 0; x < columns; x++) {
+            rainDrops[x] = 1;
+        }
+        
+        const draw = () => {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            <div class="music-player">
-                <div class="music-title">HACKING THEME MUSIC</div>
-                <audio id="hackingMusic" src="https://www.example.com/your-hacking-music.mp3"></audio>
-                <div class="music-controls">
-                    <button class="music-btn" onclick="document.getElementById('hackingMusic').play()">
-                        <i class="fas fa-play"></i>
-                    </button>
-                    <button class="music-btn" onclick="document.getElementById('hackingMusic').pause()">
-                        <i class="fas fa-pause"></i>
-                    </button>
-                    <button class="music-btn" onclick="document.getElementById('hackingMusic').volume += 0.1">
-                        <i class="fas fa-volume-up"></i>
-                    </button>
-                    <button class="music-btn" onclick="document.getElementById('hackingMusic').volume -= 0.1">
-                        <i class="fas fa-volume-down"></i>
-                    </button>
-                </div>
-            </div>
-        </section>
+            ctx.fillStyle = '#0f0';
+            ctx.font = fontSize + 'px monospace';
+            
+            for (let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+                
+                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        };
         
-        <section id="gallery" 
+        setInterval(draw, 30);
+        
+        // Update datetime
+        function updateDateTime() {
+            const now = new Date();
+            const datetime = now.toLocaleString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            document.getElementById('datetime').textContent = datetime;
+        }
+        
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+        
+        // Typewriter effect
+        const phrases = [
+            "whoami",
+            "uname -a",
+            "ifconfig",
+            "netstat -tulnp",
+            "ps aux",
+            "ls -la",
+            "cd ~",
+            "sudo !!",
+            "nmap -sV -O target.com",
+            "hydra -l user -P passlist.txt ssh://target"
+        ];
+        
+        let currentPhrase = 0;
+        let currentChar = 0;
+        let isDeleting = false;
+        const typingElement = document.querySelector('.typing-text');
+        
+        function type() {
+            const fullPhrase = phrases[currentPhrase];
+            
+            if (isDeleting) {
+                typingElement.textContent = fullPhrase.substring(0, currentChar - 1);
+                currentChar--;
+            } else {
+                typingElement.textContent = fullPhrase.substring(0, currentChar + 1);
+                currentChar++;
+            }
+            
+            if (!isDeleting && typingElement.textContent === fullPhrase) {
+                isDeleting = true;
+                setTimeout(type, 2000);
+            } else if (isDeleting && typingElement.textContent === '') {
+                isDeleting = false;
+                currentPhrase = (currentPhrase + 1) % phrases.length;
+                setTimeout(type, 500);
+            } else {
+                const speed = isDeleting ? 100 : 150;
+                setTimeout(type, speed);
+            }
+        }
+        
+        setTimeout(type, 1000);
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+        });
+
+        // Terminal functionality
+        const terminalWindow = document.getElementById('terminal-window');
+        const terminalOverlay = document.getElementById('terminal-overlay');
+        const terminalToggle = document.getElementById('terminal-toggle');
+        const terminalClose = document.getElementById('terminal-close');
+        const terminalCommand = document.getElementById('terminal-command');
+        const terminalOutput = document.getElementById('terminal-output');
+        const terminalContent = document.getElementById('terminal-content');
+
+        // Terminal commands
+        const commands = {
+            help: {
+                description: "Show available commands",
+                execute: () => {
+                    let output = "Available commands:<br>";
+                    for (const cmd in commands) {
+                        output += `${cmd} - ${commands[cmd].description}<br>`;
+                    }
+                    return output;
+                }
+            },
+            clear: {
+                description: "Clear terminal screen",
+                execute: () => {
+                    terminalContent.innerHTML = '<p>Welcome to Arnab\'s interactive terminal!</p><p>Type \'help\' to see available commands.</p>';
+                    return "";
+                }
+            },
+            about: {
+                description: "Show about information",
+                execute: () => {
+                    return "Arnab Das - Ethical Hacker & Security Researcher<br>Specializing in penetration testing and cybersecurity research.";
+                }
+            },
+            skills: {
+                description: "List technical skills",
+                execute: () => {
+                    return "> Penetration Testing<br>> Vulnerability Assessment<br>> Reverse Engineering<br>> Malware Analysis<br>> Digital Forensics";
+                }
+            },
+            contact: {
+                description: "Show contact information",
+                execute: () => {
+                    return "Email: arnab@example.com<br>Twitter: @arnabdas<br>GitHub: github.com/arnabdas";
+                }
+            },
+            social: {
+                description: "Show social media links",
+                execute: () => {
+                    return "Twitter: @arnabdas<br>GitHub: github.com/arnabdas<br>LinkedIn: linkedin.com/in/arnabdas<br>Instagram: @arnab_086";
+                }
+            },
+            banner: {
+                description: "Show ASCII art banner",
+                execute: () => {
+                    return `
+                    <pre>
+  ___  _ __ _ __ ___  _ __  
+ / _ \\| '__| '__/ _ \\| '__| 
+| (_) | |  | | | (_) | |    
+ \\___/|_|  |_|  \\___/|_|    
+                    </pre>
+                    `;
+                }
+            }
+        };
+
+        // Terminal toggle
+        terminalToggle.addEventListener('click', () => {
+            terminalWindow.style.display = "flex";
+            terminalOverlay.style.display = "block";
+            terminalCommand.focus();
+        });
+
+        terminalClose.addEventListener('click', () => {
+            terminalWindow.style.display = "none";
+            terminalOverlay.style.display = "none";
+        });
+
+        terminalOverlay.addEventListener('click', () => {
+            terminalWindow.style.display = "none";
+            terminalOverlay.style.display = "none";
+        });
+
+        // Terminal command processing
+        terminalCommand.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const command = terminalCommand.value.trim().toLowerCase();
+                terminalCommand.value = "";
+                
+                // Add command to history
+                const commandLine = document.createElement('p');
+                commandLine.innerHTML = `$ ${command}`;
+                terminalContent.appendChild(commandLine);
+                
+                // Process command
+                let output = "Command not found. Type 'help' for available commands.";
+                if (commands[command]) {
+                    output = commands[command].execute();
+                }
+                
+                // Add output
+                const outputElement = document.createElement('p');
+                outputElement.innerHTML = output;
+                terminalContent.appendChild(outputElement);
+                
+                // Scroll to bottom
+                terminalContent.scrollTop = terminalContent.scrollHeight;
+            }
+        });
+    </script>
+</body>
+</html>
