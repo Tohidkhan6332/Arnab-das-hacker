@@ -31,6 +31,52 @@
                 radial-gradient(circle at 90% 80%, rgba(0, 168, 255, 0.05) 0%, transparent 20%);
         }
         
+        /* Loading Screen */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--darker);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .loading-terminal {
+            width: 80%;
+            max-width: 600px;
+            background-color: var(--dark);
+            border: 1px solid var(--primary);
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+        
+        .loading-bar {
+            width: 100%;
+            height: 20px;
+            background-color: var(--darker);
+            margin-top: 20px;
+            border: 1px solid var(--primary);
+            overflow: hidden;
+        }
+        
+        .loading-progress {
+            height: 100%;
+            width: 0%;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .loading-text {
+            margin-top: 10px;
+            color: var(--light);
+        }
+        
         .terminal-bar {
             background-color: var(--darker);
             padding: 5px 15px;
@@ -428,6 +474,416 @@
             margin-bottom: 1rem;
         }
 
+        /* New Styles for Enhanced Features */
+        
+        /* Live Code Editor */
+        .code-editor {
+            background-color: var(--darker);
+            border: 1px solid var(--primary);
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+        
+        .editor-header {
+            background-color: var(--dark);
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--primary);
+        }
+        
+        .editor-title {
+            color: var(--light);
+            font-size: 0.9rem;
+        }
+        
+        .editor-controls {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .editor-control {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .editor-content {
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            color: var(--light);
+            background-color: #1e1e1e;
+            min-height: 200px;
+            overflow-x: auto;
+        }
+        
+        .code-line {
+            margin-bottom: 5px;
+        }
+        
+        .code-comment {
+            color: #6a9955;
+        }
+        
+        .code-keyword {
+            color: #569cd6;
+        }
+        
+        .code-string {
+            color: #ce9178;
+        }
+        
+        .code-function {
+            color: #dcdcaa;
+        }
+        
+        /* Skills Matrix */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .skill-item {
+            background-color: var(--darker);
+            border: 1px solid var(--primary);
+            padding: 1rem;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 255, 0, 0.2);
+        }
+        
+        .skill-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .skill-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+        
+        .skill-name {
+            color: var(--light);
+            font-size: 1.1rem;
+        }
+        
+        .skill-bar {
+            height: 8px;
+            background-color: var(--dark);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background-color: var(--primary);
+            border-radius: 4px;
+            transition: width 1s ease-in-out;
+        }
+        
+        /* Project Showcase */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .project-card {
+            background-color: var(--darker);
+            border: 1px solid var(--primary);
+            border-radius: 5px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 0, 0.2);
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--primary);
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-title {
+            color: var(--secondary);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-description {
+            color: var(--light);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tech-tag {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            border: 1px solid var(--primary);
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .project-link {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .project-link:hover {
+            color: var(--primary);
+        }
+        
+        /* Blog Section */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .blog-card {
+            background-color: var(--darker);
+            border: 1px solid var(--primary);
+            border-radius: 5px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 0, 0.2);
+        }
+        
+        .blog-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--primary);
+        }
+        
+        .blog-content {
+            padding: 1.5rem;
+        }
+        
+        .blog-title {
+            color: var(--secondary);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .blog-excerpt {
+            color: var(--light);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--light);
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .blog-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .blog-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* AI Assistant */
+        .ai-assistant {
+            position: fixed;
+            bottom: 150px;
+            right: 20px;
+            background-color: var(--secondary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 168, 255, 0.5);
+            z-index: 999;
+        }
+        
+        .ai-assistant i {
+            font-size: 1.5rem;
+        }
+        
+        .ai-chat-window {
+            position: fixed;
+            bottom: 210px;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+            background-color: var(--darker);
+            border: 1px solid var(--primary);
+            border-radius: 10px;
+            display: none;
+            flex-direction: column;
+            z-index: 1000;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+        
+        .ai-chat-header {
+            background-color: var(--dark);
+            padding: 10px 15px;
+            border-bottom: 1px solid var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .ai-chat-title {
+            color: var(--light);
+            font-size: 1rem;
+        }
+        
+        .ai-chat-close {
+            color: var(--light);
+            cursor: pointer;
+        }
+        
+        .ai-chat-messages {
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .ai-message {
+            max-width: 80%;
+            padding: 8px 12px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .ai-message-bot {
+            background-color: var(--dark);
+            color: var(--light);
+            align-self: flex-start;
+            border-bottom-left-radius: 0;
+        }
+        
+        .ai-message-user {
+            background-color: var(--secondary);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 0;
+        }
+        
+        .ai-typing {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--light);
+            font-style: italic;
+        }
+        
+        .ai-typing-dots {
+            display: flex;
+            gap: 2px;
+        }
+        
+        .ai-typing-dot {
+            width: 6px;
+            height: 6px;
+            background-color: var(--light);
+            border-radius: 50%;
+            animation: typingAnimation 1.4s infinite ease-in-out;
+        }
+        
+        .ai-typing-dot:nth-child(1) { animation-delay: 0s; }
+        .ai-typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .ai-typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        
+        @keyframes typingAnimation {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+        }
+        
+        .ai-chat-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid var(--primary);
+            background-color: var(--dark);
+        }
+        
+        .ai-chat-input input {
+            flex-grow: 1;
+            background: transparent;
+            border: none;
+            color: var(--light);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.9rem;
+            outline: none;
+        }
+        
+        .ai-chat-send {
+            background: transparent;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+        }
+        
+        /* Particles Background */
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
@@ -453,11 +909,41 @@
                 flex-direction: column;
                 align-items: flex-start;
             }
+            
+            .ai-chat-window {
+                width: 280px;
+                height: 350px;
+            }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loading-terminal">
+            <div class="terminal-bar">
+                <div class="terminal-controls">
+                    <div class="control close"></div>
+                    <div class="control minimize"></div>
+                    <div class="control maximize"></div>
+                </div>
+                <div class="terminal-title">system@boot:~</div>
+                <div></div>
+            </div>
+            <div class="terminal-content">
+                <p>Initializing system...</p>
+                <p>Loading security protocols...</p>
+                <p>Establishing secure connection...</p>
+                <p>Welcome to Arnab Das Portfolio</p>
+            </div>
+            <div class="loading-bar">
+                <div class="loading-progress" id="loading-progress"></div>
+            </div>
+            <div class="loading-text" id="loading-text">Booting system... 0%</div>
+        </div>
+    </div>
+    
     <div class="terminal-bar">
         <div class="terminal-controls">
             <div class="control close"></div>
@@ -470,6 +956,7 @@
     
     <header>
         <canvas id="matrix" class="matrix-bg"></canvas>
+        <div id="particles-js"></div>
         <img src="https://files.catbox.moe/ps57ym.jpg" alt="Arnab Das" class="profile-img">
         <h1>ARNAB DAS</h1>
         <p class="tagline">Ethical Hacker | Security Researcher | Penetration Tester</p>
@@ -477,9 +964,11 @@
     </header>
     
     <nav>
+        <a href="https://arnabhacker.vercel.app/">Website</a>
         <a href="#about">About</a>
         <a href="#skills">Skills</a>
         <a href="#projects">Projects</a>
+        <a href="#blog">Blog</a>
         <a href="#media">Media</a>
         <a href="#gallery">Gallery</a>
         <a href="#contact">Contact</a>
@@ -491,92 +980,248 @@
         <p>With years of experience in penetration testing, vulnerability assessment, and security research, I help organizations identify and mitigate security risks before they can be exploited by malicious actors.</p>
         <p>My philosophy: <span class="command">"To beat a hacker, you need to think like one."</span></p>
         
-     <!--   <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/pzGMmQ-Dg0M?autoplay=1&mute=1&loop=1&controls=0&playlist=pzGMmQ-Dg0M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <!-- Interactive Terminal Introduction -->
+        <div class="code-editor">
+            <div class="editor-header">
+                <div class="editor-title">terminal_intro.sh</div>
+                <div class="editor-controls">
+                    <div class="editor-control close"></div>
+                    <div class="editor-control minimize"></div>
+                    <div class="editor-control maximize"></div>
+                </div>
+            </div>
+            <div class="editor-content">
+                <div class="code-line"><span class="code-comment">#!/bin/bash</span></div>
+                <div class="code-line"><span class="code-comment"># Interactive Introduction Script</span></div>
+                <div class="code-line"></div>
+                <div class="code-line"><span class="code-function">echo</span> <span class="code-string">"Initializing security protocols..."</span></div>
+                <div class="code-line"><span class="code-function">sleep</span> 1</div>
+                <div class="code-line"><span class="code-function">echo</span> <span class="code-string">"Welcome to my cybersecurity portfolio"</span></div>
+                <div class="code-line"><span class="code-function">sleep</span> 1</div>
+                <div class="code-line"><span class="code-function">echo</span> <span class="code-string">"I specialize in:"</span></div>
+                <div class="code-line"><span class="code-function">echo</span> <span class="code-string">"- Penetration Testing"</span></div>
+                <div class="code-line"><span class="code-function">echo</span> <span class="code-string">"- Vulnerability Assessment"</span></div>
+                <div class="code-line"><span class="code-function">echo</span> <span class="code-string">"- Security Research"</span></div>
+                <div class="code-line"><span class="code-function">echo</span> <span class="code-string">"- Digital Forensics"</span></div>
+                <div class="code-line"><span class="code-function">sleep</span> 2</div>
+                <div class="code-line"><span class="code-function">echo</span> <span class="code-string">"System ready. Explore my work below."</span></div>
+            </div>
         </div>
-    </section> -->
+    </section>
     
     <section id="skills">
         <h2>My Skills</h2>
-        <p><span class="command">$ skills --list</span></p>
-        <p>> Penetration Testing (Web, Network, Mobile)</p>
-        <p>> Vulnerability Assessment</p>
-        <p>> Reverse Engineering</p>
-        <p>> Malware Analysis</p>
-        <p>> Digital Forensics</p>
-        <p>> Secure Coding Practices</p>
-        <p>> Cryptography</p>
-        <p>> Network Security</p>
-        <p>> Security Tool Development</p>
+        <p><span class="command">$ skills --matrix</span></p>
+        
+        <div class="skills-grid">
+            <div class="skill-item">
+                <div class="skill-header">
+                    <i class="fas fa-shield-alt skill-icon"></i>
+                    <span class="skill-name">Penetration Testing</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" data-width="95"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-header">
+                    <i class="fas fa-bug skill-icon"></i>
+                    <span class="skill-name">Vulnerability Assessment</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" data-width="90"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-header">
+                    <i class="fas fa-code skill-icon"></i>
+                    <span class="skill-name">Reverse Engineering</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" data-width="85"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-header">
+                    <i class="fas fa-virus skill-icon"></i>
+                    <span class="skill-name">Malware Analysis</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" data-width="80"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-header">
+                    <i class="fas fa-search skill-icon"></i>
+                    <span class="skill-name">Digital Forensics</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" data-width="85"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-header">
+                    <i class="fas fa-lock skill-icon"></i>
+                    <span class="skill-name">Cryptography</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" data-width="75"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-header">
+                    <i class="fas fa-network-wired skill-icon"></i>
+                    <span class="skill-name">Network Security</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" data-width="90"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-header">
+                    <i class="fas fa-tools skill-icon"></i>
+                    <span class="skill-name">Security Tool Development</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" data-width="85"></div>
+                </div>
+            </div>
+        </div>
     </section>
     
     <section id="projects">
         <h2>Notable Projects</h2>
-        <p><span class="command">$ cat projects.txt</span></p>
-        <p>> <strong>SecureAuth Framework</strong> - Developed a multi-factor authentication system resistant to common attacks</p>
-        <p>> <strong>VulnScan Pro</strong> - Automated vulnerability scanner with advanced detection capabilities</p>
-        <p>> <strong>CryptoShield</strong> - Encryption tool with military-grade algorithms</p>
-        <p>> <strong>DarkWeb Monitor</strong> - Tool to track potential data leaks and compromised credentials</p>
-        <p>> <strong>Pentest Toolkit</strong> - Custom collection of penetration testing scripts and utilities</p>
-    </section>
-
-    <!-- New Media Section with Audio and Video -->
-    <section id="media">
-    <h2>Media</h2>
-    
-    <div class="music-player">
-        <h3>Hacking Soundtracks</h3>
-        <div class="audio-controls">
-            <div class="audio-track">
-                <span>Cyberpunk Theme (autoplay):</span>
-                <audio controls autoplay loop>
-                    <source src="https://files.catbox.moe/5zf4p2.mp3" type="audio/mpeg">
-                    Your browser does not support the audio element.
-                </audio>
+        <p><span class="command">$ ls -la projects/</span></p>
+        
+        <div class="projects-grid">
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="SecureAuth Framework" class="project-image">
+                <div class="project-content">
+                    <h3 class="project-title">SecureAuth Framework</h3>
+                    <p class="project-description">Developed a multi-factor authentication system resistant to common attacks with advanced security features.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Cryptography</span>
+                        <span class="tech-tag">OAuth</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link"><i class="fab fa-github"></i> Source Code</a>
+                        <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                    </div>
+                </div>
             </div>
-            <div class="audio-track">
-                <span>Digital Warfare:</span>
-                <audio controls>
-                    <source src="https://files.catbox.moe/7mcrij.mp3" type="audio/mpeg">
-                    Your browser does not support the audio element.
-                </audio>
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="VulnScan Pro" class="project-image">
+                <div class="project-content">
+                    <h3 class="project-title">VulnScan Pro</h3>
+                    <p class="project-description">Automated vulnerability scanner with advanced detection capabilities and comprehensive reporting.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Nmap</span>
+                        <span class="tech-tag">Metasploit</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link"><i class="fab fa-github"></i> Source Code</a>
+                        <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Documentation</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="CryptoShield" class="project-image">
+                <div class="project-content">
+                    <h3 class="project-title">CryptoShield</h3>
+                    <p class="project-description">Encryption tool with military-grade algorithms and user-friendly interface for secure communications.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">C++</span>
+                        <span class="tech-tag">AES</span>
+                        <span class="tech-tag">RSA</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link"><i class="fab fa-github"></i> Source Code</a>
+                        <a href="#" class="project-link"><i class="fas fa-download"></i> Download</a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="local-video-container">
-    <h3>Security Demonstration</h3>
-    <div class="video-container">
-        <video controls autoplay loop>
-            <source src="https://files.catbox.moe/ucj1dp.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </div>
-    <div class="local-video-container">
-    <h3>Security Demonstration</h3>
-    <div class="video-container">
-        <video controls autoplay loop>
-            <source src="https://files.catbox.moe/fnvhci.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </div>
-    <div class="local-video-container">
-    <h3>Security Demonstration</h3>
-    <div class="video-container">
-        <video controls autoplay loop>
-            <source src="https://files.catbox.moe/ujnyn0.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </div>
-    <div class="video-options">
-        <h4>More Demonstrations:</h4>
-        <ul>
-            <li><a href="https://files.catbox.moe/fnvhci.mp4" target="_blank">Extended Security Demo (10s)</a></li>
-            <li><a href="https://files.catbox.moe/ujnyn0.mp4" target="_blank">Advanced Techniques (15s)</a></li>
-        </ul>
-    </div>
-</div>
-</section>
+    <section id="blog">
+        <h2>Security Blog</h2>
+        <p><span class="command">$ cat blog/latest.txt</span></p>
+        
+        <div class="blog-grid">
+            <div class="blog-card">
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Web Application Security" class="blog-image">
+                <div class="blog-content">
+                    <h3 class="blog-title">Advanced Web Application Penetration Testing</h3>
+                    <p class="blog-excerpt">Learn advanced techniques for identifying and exploiting vulnerabilities in modern web applications.</p>
+                    <div class="blog-meta">
+                        <span>May 15, 2025</span>
+                        <span>10 min read</span>
+                    </div>
+                    <a href="#" class="blog-link">Read More →</a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Malware Analysis" class="blog-image">
+                <div class="blog-content">
+                    <h3 class="blog-title">Malware Analysis Fundamentals</h3>
+                    <p class="blog-excerpt">A comprehensive guide to analyzing malicious software and understanding its behavior.</p>
+                    <div class="blog-meta">
+                        <span>April 28, 2025</span>
+                        <span>15 min read</span>
+                    </div>
+                    <a href="#" class="blog-link">Read More →</a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Cryptography" class="blog-image">
+                <div class="blog-content">
+                    <h3 class="blog-title">Modern Cryptography in Cybersecurity</h3>
+                    <p class="blog-excerpt">Exploring the role of cryptography in securing digital communications and data.</p>
+                    <div class="blog-meta">
+                        <span>March 12, 2025</span>
+                        <span>12 min read</span>
+                    </div>
+                    <a href="#" class="blog-link">Read More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="media">
+        <h2>Media</h2>
+        
+        <div class="music-player">
+            <h3>Hacking Soundtracks</h3>
+            <div class="audio-controls">
+                <div class="audio-track">
+                    <span>Cyberpunk Theme:</span>
+                    <audio controls loop>
+                        <source src="https://files.catbox.moe/5zf4p2.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                <div class="audio-track">
+                    <span>Digital Warfare:</span>
+                    <audio controls>
+                        <source src="https://files.catbox.moe/7mcrij.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
+        </div>
+
+        <div class="local-video-container">
+            <h3>Security Demonstration</h3>
+            <div class="video-container">
+                <video controls>
+                    <source src="https://files.catbox.moe/ucj1dp.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </section>
     
     <section id="gallery">
         <h2>Hacking Gallery</h2>
@@ -663,7 +1308,58 @@
         <i class="fab fa-whatsapp"></i>
     </a>
     
+    <!-- AI Assistant Button -->
+    <div class="ai-assistant" id="ai-assistant">
+        <i class="fas fa-robot"></i>
+    </div>
+    
+    <!-- AI Chat Window -->
+    <div class="ai-chat-window" id="ai-chat-window">
+        <div class="ai-chat-header">
+            <div class="ai-chat-title">Security Assistant</div>
+            <div class="ai-chat-close" id="ai-chat-close">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+        <div class="ai-chat-messages" id="ai-chat-messages">
+            <div class="ai-message ai-message-bot">
+                Hello! I'm your security assistant. I can help with cybersecurity questions, tools, and career advice. How can I assist you today?
+            </div>
+        </div>
+        <div class="ai-chat-input">
+            <input type="text" id="ai-chat-input" placeholder="Ask me about security...">
+            <button class="ai-chat-send" id="ai-chat-send">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
+        // Loading screen functionality
+        const loadingScreen = document.getElementById('loading-screen');
+        const loadingProgress = document.getElementById('loading-progress');
+        const loadingText = document.getElementById('loading-text');
+        
+        let progress = 0;
+        const loadingInterval = setInterval(() => {
+            progress += Math.random() * 10;
+            if (progress > 100) progress = 100;
+            
+            loadingProgress.style.width = `${progress}%`;
+            loadingText.textContent = `Booting system... ${Math.floor(progress)}%`;
+            
+            if (progress === 100) {
+                clearInterval(loadingInterval);
+                setTimeout(() => {
+                    loadingScreen.style.opacity = '0';
+                    setTimeout(() => {
+                        loadingScreen.style.display = 'none';
+                    }, 500);
+                }, 500);
+            }
+        }, 200);
+        
         // Matrix background effect
         const canvas = document.getElementById('matrix');
         const ctx = canvas.getContext('2d');
@@ -706,6 +1402,41 @@
         };
         
         setInterval(draw, 30);
+        
+        // Particles.js background
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#0f0" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#0f0",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "repulse" },
+                    onclick: { enable: true, mode: "push" },
+                    resize: true
+                }
+            }
+        });
         
         // Update datetime
         function updateDateTime() {
@@ -770,6 +1501,22 @@
         
         setTimeout(type, 1000);
         
+        // Animate skill bars when in viewport
+        const skillProgresses = document.querySelectorAll('.skill-progress');
+        
+        function animateSkills() {
+            skillProgresses.forEach(progress => {
+                const rect = progress.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom >= 0) {
+                    const width = progress.getAttribute('data-width');
+                    progress.style.width = `${width}%`;
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', animateSkills);
+        window.addEventListener('load', animateSkills);
+        
         // Handle window resize
         window.addEventListener('resize', () => {
             canvas.width = canvas.offsetWidth;
@@ -819,13 +1566,13 @@
             contact: {
                 description: "Show contact information",
                 execute: () => {
-                    return "Email: arnabdashacker@gmail.com<br>Twitter: @arnabdas<br>GitHub: github.com/arnabdas";
+                    return "Email: das742811@gmail.com<br>GitHub: github.com/arnabdas789<br>LinkedIn: linkedin.com/in/arnab-das-86327336b";
                 }
             },
             social: {
                 description: "Show social media links",
                 execute: () => {
-                    return "Twitter: @arnabdas<br>GitHub: github.com/arnabdas<br>LinkedIn: linkedin.com/in/arnabdas<br>Instagram: @arnab_086";
+                    return "Facebook: facebook.com/share/1B7tMJL2Nd/<br>GitHub: github.com/arnabdas789<br>LinkedIn: linkedin.com/in/arnab-das-86327336b<br>Instagram: @arnab_086";
                 }
             },
             banner: {
@@ -841,10 +1588,10 @@
                     `;
                 }
             },
-            play: {
-                description: "Control media playback",
+            projects: {
+                description: "Show project information",
                 execute: () => {
-                    return "Media controls:<br>- play music1<br>- play music2<br>- play video";
+                    return "SecureAuth Framework - Multi-factor authentication system<br>VulnScan Pro - Automated vulnerability scanner<br>CryptoShield - Encryption tool with military-grade algorithms";
                 }
             }
         };
@@ -893,10 +1640,108 @@
             }
         });
 
-        // Auto-play music on page load (optional)
-        document.addEventListener('DOMContentLoaded', () => {
-            // You can add autoplay logic here if desired
-            // Note: Many browsers block autoplay with sound
+        // AI Assistant functionality
+        const aiAssistant = document.getElementById('ai-assistant');
+        const aiChatWindow = document.getElementById('ai-chat-window');
+        const aiChatClose = document.getElementById('ai-chat-close');
+        const aiChatMessages = document.getElementById('ai-chat-messages');
+        const aiChatInput = document.getElementById('ai-chat-input');
+        const aiChatSend = document.getElementById('ai-chat-send');
+        
+        // Toggle AI chat window
+        aiAssistant.addEventListener('click', () => {
+            if (aiChatWindow.style.display === 'flex') {
+                aiChatWindow.style.display = 'none';
+            } else {
+                aiChatWindow.style.display = 'flex';
+                aiChatInput.focus();
+            }
+        });
+        
+        aiChatClose.addEventListener('click', () => {
+            aiChatWindow.style.display = 'none';
+        });
+        
+        // Create typing indicator
+        function createTypingIndicator() {
+            const typingElement = document.createElement('div');
+            typingElement.className = 'ai-typing';
+            typingElement.innerHTML = `
+                Assistant is typing
+                <div class="ai-typing-dots">
+                    <div class="ai-typing-dot"></div>
+                    <div class="ai-typing-dot"></div>
+                    <div class="ai-typing-dot"></div>
+                </div>
+            `;
+            return typingElement;
+        }
+        
+        // Send message function
+        async function sendMessage() {
+            const message = aiChatInput.value.trim();
+            if (message === '') return;
+            
+            // Add user message
+            const userMessage = document.createElement('div');
+            userMessage.className = 'ai-message ai-message-user';
+            userMessage.textContent = message;
+            aiChatMessages.appendChild(userMessage);
+            
+            // Clear input
+            aiChatInput.value = '';
+            
+            // Scroll to bottom
+            aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+            
+            // Show typing indicator
+            const typingIndicator = createTypingIndicator();
+            aiChatMessages.appendChild(typingIndicator);
+            aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+            
+            try {
+                // Call the AI API
+                const apiUrl = `https://ab-hyper-ai.abrahamdw882.workers.dev/?q=${encodeURIComponent(message)}`;
+                const response = await fetch(apiUrl);
+                
+                if (!response.ok) {
+                    throw new Error(`API request failed with status ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                // Remove typing indicator
+                aiChatMessages.removeChild(typingIndicator);
+                
+                // Add AI response
+                const botMessage = document.createElement('div');
+                botMessage.className = 'ai-message ai-message-bot';
+                botMessage.textContent = data.response || "I'm sorry, I couldn't process your request. Please try again.";
+                aiChatMessages.appendChild(botMessage);
+                
+            } catch (error) {
+                console.error('Error calling AI API:', error);
+                
+                // Remove typing indicator
+                aiChatMessages.removeChild(typingIndicator);
+                
+                // Add error message
+                const errorMessage = document.createElement('div');
+                errorMessage.className = 'ai-message ai-message-bot';
+                errorMessage.textContent = "I'm experiencing technical difficulties. Please try again later or ask me about cybersecurity topics like penetration testing, vulnerability assessment, or security tools.";
+                aiChatMessages.appendChild(errorMessage);
+            }
+            
+            // Scroll to bottom
+            aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+        }
+        
+        // Send message on button click or Enter key
+        aiChatSend.addEventListener('click', sendMessage);
+        aiChatInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
         });
     </script>
 </body>
