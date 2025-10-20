@@ -3,1418 +3,1339 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arnab Das | Ethical Hacker & Security Researcher</title>
+    <title>ARNAB DAS | Ethical Hacker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-        
         :root {
-            --primary: #0f0;
-            --secondary: #00a8ff;
-            --dark: #111;
-            --darker: #0a0a0a;
-            --light: #ccc;
+            --primary: #00ff41;
+            --secondary: #008f11;
+            --dark: #0a0a0a;
+            --darker: #050505;
+            --light: #f0f0f0;
+            --gray: #333;
+            --terminal-bg: rgba(10, 10, 10, 0.9);
+            --terminal-border: #00ff41;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Fira Code', monospace;
         }
-        
+
         body {
-            font-family: 'Share Tech Mono', monospace;
             background-color: var(--dark);
-            color: var(--primary);
+            color: var(--light);
             overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(0, 255, 0, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(0, 168, 255, 0.05) 0%, transparent 20%);
+            line-height: 1.6;
         }
-        
-        /* Loading Screen */
-        #loading-screen {
+
+        /* Particles Background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Preloader */
+        #preloader {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: var(--darker);
+            background: var(--darker);
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            transition: opacity 0.5s ease-out;
+            flex-direction: column;
         }
-        
-        .loading-terminal {
-            width: 80%;
-            max-width: 600px;
-            background-color: var(--dark);
-            border: 1px solid var(--primary);
-            padding: 20px;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+
+        .loader-text {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-family: 'Orbitron', sans-serif;
         }
-        
-        .loading-bar {
-            width: 100%;
-            height: 20px;
-            background-color: var(--darker);
-            margin-top: 20px;
-            border: 1px solid var(--primary);
+
+        .progress-bar {
+            width: 300px;
+            height: 10px;
+            background: var(--gray);
+            border-radius: 5px;
             overflow: hidden;
         }
-        
-        .loading-progress {
+
+        .progress {
             height: 100%;
             width: 0%;
-            background-color: var(--primary);
+            background: var(--primary);
             transition: width 0.3s ease;
         }
-        
-        .loading-text {
-            margin-top: 10px;
-            color: var(--light);
-        }
-        
-        .terminal-bar {
-            background-color: var(--darker);
-            padding: 5px 15px;
+
+        /* Header */
+        header {
+            padding: 20px 5%;
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            background: rgba(5, 5, 5, 0.8);
             border-bottom: 1px solid var(--primary);
-        }
-        
-        .terminal-controls {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .control {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-        
-        .close { background-color: #ff5f56; }
-        .minimize { background-color: #ffbd2e; }
-        .maximize { background-color: #27c93f; }
-        
-        .terminal-title {
-            font-size: 0.8rem;
-        }
-        
-        header {
-            padding: 2rem;
-            text-align: center;
-            position: relative;
-        }
-        
-        .matrix-bg {
-            position: absolute;
+            position: sticky;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.1;
+            z-index: 100;
         }
-        
-        .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 3px solid var(--primary);
-            object-fit: cover;
-            margin-bottom: 1rem;
-            box-shadow: 0 0 20px var(--primary);
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: var(--primary);
             text-shadow: 0 0 10px var(--primary);
         }
-        
-        .tagline {
-            color: var(--secondary);
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-        }
-        
-        .typing-text {
-            border-right: 2px solid var(--primary);
-            animation: blink 0.75s step-end infinite;
-            display: inline-block;
-        }
-        
-        @keyframes blink {
-            from, to { border-color: transparent; }
-            50% { border-color: var(--primary); }
-        }
-        
-        nav {
+
+        nav ul {
             display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 2rem 0;
-            flex-wrap: wrap;
+            list-style: none;
         }
-        
-        nav a {
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
             color: var(--light);
             text-decoration: none;
-            font-size: 1.1rem;
-            transition: all 0.3s;
+            font-weight: 500;
+            transition: color 0.3s;
             position: relative;
         }
-        
-        nav a:hover {
+
+        nav ul li a:hover {
             color: var(--primary);
         }
-        
-        nav a::after {
+
+        nav ul li a::after {
             content: '';
             position: absolute;
             bottom: -5px;
             left: 0;
             width: 0;
             height: 2px;
-            background-color: var(--primary);
+            background: var(--primary);
             transition: width 0.3s;
         }
-        
-        nav a:hover::after {
+
+        nav ul li a:hover::after {
             width: 100%;
         }
-        
-        section {
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--secondary);
-            position: relative;
-            display: inline-block;
-        }
-        
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, var(--secondary), transparent);
-        }
-        
-        p {
-            line-height: 1.6;
-            margin-bottom: 1rem;
-            color: var(--light);
-        }
-        
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            margin: 2rem 0;
-            border: 2px solid var(--primary);
-            box-shadow: 0 0 20px var(--primary);
-        }
-        
-        .video-container iframe, .video-container video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin: 2rem 0;
-            flex-wrap: wrap;
-        }
-        
-        .social-link {
-            color: var(--light);
-            text-decoration: none;
-            font-size: 1.2rem;
-            transition: all 0.3s;
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .social-link:hover {
-            color: var(--primary);
-            transform: translateY(-3px);
-        }
-        
-        .social-link i {
-            font-size: 1.5rem;
-        }
-        
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-        
-        .gallery-item {
+            padding: 0 5%;
             position: relative;
-            overflow: hidden;
-            border: 1px solid var(--primary);
-            height: 200px;
-            transition: all 0.3s;
         }
-        
-        .gallery-item:hover {
-            transform: scale(1.03);
-            box-shadow: 0 0 15px var(--primary);
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 1;
         }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary);
         }
-        
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-        
-        .gallery-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 0.5rem;
-            color: white;
-            transform: translateY(100%);
-            transition: transform 0.3s;
-        }
-        
-        .gallery-item:hover .gallery-caption {
-            transform: translateY(0);
-        }
-        
-        footer {
-            text-align: center;
-            padding: 2rem;
-            border-top: 1px solid var(--primary);
-            margin-top: 2rem;
-            color: var(--light);
-        }
-        
-        .command {
+
+        .hero h2 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
             color: var(--secondary);
         }
-        
-        .blink {
-            animation: blink 1s infinite;
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 600px;
         }
 
-        /* Terminal Window Styles */
-        .terminal-window {
-            background-color: var(--darker);
-            border: 1px solid var(--primary);
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            margin-right: 15px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--primary);
+            color: var(--dark);
+            box-shadow: 0 0 15px var(--primary);
+        }
+
+        /* Terminal */
+        .terminal-container {
+            background: var(--terminal-bg);
+            border: 1px solid var(--terminal-border);
             border-radius: 5px;
-            width: 90%;
+            width: 100%;
             max-width: 800px;
-            margin: 2rem auto;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1000;
-            max-height: 80vh;
-            flex-direction: column;
+            margin: 50px auto;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
         }
 
-        .terminal-content {
-            padding: 15px;
-            overflow-y: auto;
-            flex-grow: 1;
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-
-        .terminal-input {
+        .terminal-header {
+            background: var(--darker);
+            padding: 10px 15px;
             display: flex;
-            padding: 10px;
-            border-top: 1px solid var(--primary);
-            background-color: var(--dark);
+            align-items: center;
+            border-bottom: 1px solid var(--terminal-border);
+        }
+
+        .terminal-buttons {
+            display: flex;
+        }
+
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .close {
+            background: #ff5f56;
+        }
+
+        .minimize {
+            background: #ffbd2e;
+        }
+
+        .maximize {
+            background: #27c93f;
+        }
+
+        .terminal-title {
+            flex: 1;
+            text-align: center;
+            color: var(--light);
+            font-size: 0.9rem;
+        }
+
+        .terminal-body {
+            padding: 20px;
+            height: 400px;
+            overflow-y: auto;
+        }
+
+        .terminal-line {
+            margin-bottom: 10px;
         }
 
         .terminal-prompt {
             color: var(--primary);
+        }
+
+        .terminal-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 17px;
+            background: var(--primary);
+            margin-left: 5px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 5%;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-align: center;
+            color: var(--primary);
+            font-family: 'Orbitron', sans-serif;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        /* About */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .profile-img {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .profile-img img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 5px;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+        }
+
+        .about-text {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        /* Skills */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-category {
+            background: rgba(10, 10, 10, 0.7);
+            padding: 25px;
+            border-radius: 5px;
+            border: 1px solid var(--gray);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .skill-category h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .skill-category h3 i {
             margin-right: 10px;
         }
 
-        #terminal-command {
-            background: transparent;
-            border: none;
-            color: var(--light);
-            font-family: 'Share Tech Mono', monospace;
+        .skill-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-item {
+            background: var(--darker);
+            padding: 8px 15px;
+            border-radius: 20px;
             font-size: 0.9rem;
-            width: 100%;
-            outline: none;
+            border: 1px solid var(--gray);
+            transition: all 0.3s;
         }
 
-        .terminal-toggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--primary);
+        .skill-item:hover {
+            background: var(--primary);
             color: var(--dark);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 0 15px var(--primary);
-            z-index: 999;
+            border-color: var(--primary);
         }
 
-        .terminal-toggle i {
-            font-size: 1.5rem;
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
         }
 
-        .whatsapp-float {
-            position: fixed;
-            bottom: 90px;
-            right: 20px;
-            background-color: #25D366;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 0 15px rgba(37, 211, 102, 0.5);
-            z-index: 999;
-        }
-
-        .whatsapp-float i {
-            font-size: 1.5rem;
-        }
-
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 999;
-            display: none;
-        }
-
-        /* Music Player Styles */
-        .music-player {
-            background-color: var(--darker);
-            border: 1px solid var(--primary);
-            padding: 1rem;
-            margin: 2rem 0;
-            border-radius: 5px;
-        }
-
-        .music-player h3 {
-            color: var(--secondary);
-            margin-bottom: 1rem;
-        }
-
-        .audio-controls {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .audio-track {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .audio-track audio {
-            flex-grow: 1;
-        }
-
-        .audio-track span {
-            color: var(--light);
-            min-width: 120px;
-        }
-
-        /* Local Video Styles */
-        .local-video-container {
-            margin: 2rem 0;
-        }
-
-        .local-video-container h3 {
-            color: var(--secondary);
-            margin-bottom: 1rem;
-        }
-
-        /* New Styles for Enhanced Features */
-        
-        /* Live Code Editor */
-        .code-editor {
-            background-color: var(--darker);
-            border: 1px solid var(--primary);
+        .project-card {
+            background: rgba(10, 10, 10, 0.7);
             border-radius: 5px;
             overflow: hidden;
-            margin: 2rem 0;
+            border: 1px solid var(--gray);
+            transition: transform 0.3s, border-color 0.3s;
         }
-        
-        .editor-header {
-            background-color: var(--dark);
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .project-img {
+            height: 200px;
+            background: var(--darker);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 3rem;
+        }
+
+        .project-content {
+            padding: 20px;
+        }
+
+        .project-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .project-content p {
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .project-links a {
+            padding: 8px 15px;
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+        }
+
+        .project-links a:hover {
+            background: var(--primary);
+            color: var(--dark);
+        }
+
+        /* Code Editor */
+        .code-editor-container {
+            background: var(--terminal-bg);
+            border: 1px solid var(--terminal-border);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 30px;
+        }
+
+        .code-editor-header {
+            background: var(--darker);
             padding: 10px 15px;
             display: flex;
             justify-content: space-between;
-            border-bottom: 1px solid var(--primary);
+            align-items: center;
+            border-bottom: 1px solid var(--terminal-border);
         }
-        
-        .editor-title {
+
+        .code-editor-title {
             color: var(--light);
             font-size: 0.9rem;
         }
-        
-        .editor-controls {
-            display: flex;
-            gap: 8px;
+
+        .code-editor-body {
+            padding: 0;
         }
-        
-        .editor-control {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-        
-        .editor-content {
-            padding: 15px;
-            font-family: 'Courier New', monospace;
-            color: var(--light);
-            background-color: #1e1e1e;
-            min-height: 200px;
-            overflow-x: auto;
-        }
-        
-        .code-line {
-            margin-bottom: 5px;
-        }
-        
-        .code-comment {
-            color: #6a9955;
-        }
-        
-        .code-keyword {
-            color: #569cd6;
-        }
-        
-        .code-string {
-            color: #ce9178;
-        }
-        
-        .code-function {
-            color: #dcdcaa;
-        }
-        
-        /* Skills Matrix */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        .skill-item {
-            background-color: var(--darker);
-            border: 1px solid var(--primary);
-            padding: 1rem;
-            border-radius: 5px;
-            transition: all 0.3s;
-        }
-        
-        .skill-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 255, 0, 0.2);
-        }
-        
-        .skill-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.5rem;
-        }
-        
-        .skill-icon {
-            font-size: 1.5rem;
-            margin-right: 10px;
-            color: var(--secondary);
-        }
-        
-        .skill-name {
-            color: var(--light);
-            font-size: 1.1rem;
-        }
-        
-        .skill-bar {
-            height: 8px;
-            background-color: var(--dark);
-            border-radius: 4px;
-            overflow: hidden;
-            margin-top: 5px;
-        }
-        
-        .skill-progress {
-            height: 100%;
-            background-color: var(--primary);
-            border-radius: 4px;
-            transition: width 1s ease-in-out;
-        }
-        
-        /* Project Showcase */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-        
-        .project-card {
-            background-color: var(--darker);
-            border: 1px solid var(--primary);
-            border-radius: 5px;
-            overflow: hidden;
-            transition: all 0.3s;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 255, 0, 0.2);
-        }
-        
-        .project-image {
+
+        .code-editor {
             width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-bottom: 1px solid var(--primary);
-        }
-        
-        .project-content {
-            padding: 1.5rem;
-        }
-        
-        .project-title {
-            color: var(--secondary);
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .project-description {
-            color: var(--light);
-            margin-bottom: 1rem;
+            height: 300px;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
             line-height: 1.5;
+            border: none;
+            resize: none;
+            outline: none;
         }
-        
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .tech-tag {
-            background-color: var(--dark);
-            color: var(--light);
-            padding: 3px 8px;
-            border-radius: 3px;
-            font-size: 0.8rem;
-            border: 1px solid var(--primary);
-        }
-        
-        .project-links {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .project-link {
-            color: var(--light);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .project-link:hover {
-            color: var(--primary);
-        }
-        
-        /* Blog Section */
+
+        /* Blog */
         .blog-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
+            gap: 30px;
         }
-        
+
         .blog-card {
-            background-color: var(--darker);
-            border: 1px solid var(--primary);
+            background: rgba(10, 10, 10, 0.7);
             border-radius: 5px;
             overflow: hidden;
-            transition: all 0.3s;
+            border: 1px solid var(--gray);
+            transition: transform 0.3s, border-color 0.3s;
         }
-        
+
         .blog-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 255, 0, 0.2);
+            border-color: var(--primary);
         }
-        
-        .blog-image {
-            width: 100%;
+
+        .blog-img {
             height: 180px;
-            object-fit: cover;
-            border-bottom: 1px solid var(--primary);
+            background: var(--darker);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
         }
-        
+
         .blog-content {
-            padding: 1.5rem;
+            padding: 20px;
         }
-        
-        .blog-title {
-            color: var(--secondary);
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
+
+        .blog-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
         }
-        
-        .blog-excerpt {
-            color: var(--light);
-            margin-bottom: 1rem;
-            line-height: 1.5;
+
+        .blog-content p {
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #ccc;
         }
-        
+
         .blog-meta {
             display: flex;
             justify-content: space-between;
-            color: var(--light);
             font-size: 0.8rem;
-            margin-bottom: 1rem;
+            color: #999;
         }
-        
-        .blog-link {
+
+        /* Contact */
+        .contact-container {
+            display: flex;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
             color: var(--primary);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.3s;
         }
-        
-        .blog-link:hover {
-            text-decoration: underline;
+
+        .contact-details {
+            margin-bottom: 30px;
         }
-        
-        /* AI Assistant */
-        .ai-assistant {
-            position: fixed;
-            bottom: 150px;
-            right: 20px;
-            background-color: var(--secondary);
-            color: white;
-            width: 50px;
-            height: 50px;
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .contact-item i {
+            width: 40px;
+            height: 40px;
+            background: var(--darker);
             border-radius: 50%;
             display: flex;
-            justify-content: center;
             align-items: center;
-            cursor: pointer;
-            box-shadow: 0 0 15px rgba(0, 168, 255, 0.5);
-            z-index: 999;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--primary);
+            border: 1px solid var(--gray);
         }
-        
-        .ai-assistant i {
-            font-size: 1.5rem;
+
+        .social-links {
+            display: flex;
+            gap: 15px;
         }
-        
-        .ai-chat-window {
-            position: fixed;
-            bottom: 210px;
-            right: 20px;
-            width: 300px;
-            height: 400px;
-            background-color: var(--darker);
-            border: 1px solid var(--primary);
-            border-radius: 10px;
-            display: none;
-            flex-direction: column;
-            z-index: 1000;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: var(--darker);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            text-decoration: none;
+            border: 1px solid var(--gray);
+            transition: all 0.3s;
         }
-        
-        .ai-chat-header {
-            background-color: var(--dark);
-            padding: 10px 15px;
-            border-bottom: 1px solid var(--primary);
+
+        .social-link:hover {
+            background: var(--primary);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--light);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background: var(--darker);
+            border: 1px solid var(--gray);
+            border-radius: 5px;
+            color: var(--light);
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--darker);
+            padding: 30px 5%;
+            text-align: center;
+            border-top: 1px solid var(--primary);
+        }
+
+        .footer-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
         }
-        
-        .ai-chat-title {
-            color: var(--light);
-            font-size: 1rem;
+
+        .footer-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--primary);
         }
-        
-        .ai-chat-close {
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-links a {
             color: var(--light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* Floating Buttons */
+        .floating-buttons {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .floating-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             cursor: pointer;
+            transition: transform 0.3s;
+            border: none;
         }
-        
-        .ai-chat-messages {
-            flex-grow: 1;
-            padding: 15px;
-            overflow-y: auto;
+
+        .floating-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+        }
+
+        .ai-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+
+        .datetime {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: rgba(5, 5, 5, 0.8);
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: 1px solid var(--primary);
+            font-size: 0.9rem;
+            color: var(--primary);
+            z-index: 100;
+        }
+
+        /* Media Controls */
+        .media-controls {
+            position: fixed;
+            top: 100px;
+            right: 30px;
             display: flex;
             flex-direction: column;
             gap: 10px;
+            z-index: 100;
         }
-        
-        .ai-message {
-            max-width: 80%;
-            padding: 8px 12px;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-        
-        .ai-message-bot {
-            background-color: var(--dark);
-            color: var(--light);
-            align-self: flex-start;
-            border-bottom-left-radius: 0;
-        }
-        
-        .ai-message-user {
-            background-color: var(--secondary);
-            color: white;
-            align-self: flex-end;
-            border-bottom-right-radius: 0;
-        }
-        
-        .ai-typing {
+
+        .media-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            gap: 5px;
-            color: var(--light);
-            font-style: italic;
-        }
-        
-        .ai-typing-dots {
-            display: flex;
-            gap: 2px;
-        }
-        
-        .ai-typing-dot {
-            width: 6px;
-            height: 6px;
-            background-color: var(--light);
-            border-radius: 50%;
-            animation: typingAnimation 1.4s infinite ease-in-out;
-        }
-        
-        .ai-typing-dot:nth-child(1) { animation-delay: 0s; }
-        .ai-typing-dot:nth-child(2) { animation-delay: 0.2s; }
-        .ai-typing-dot:nth-child(3) { animation-delay: 0.4s; }
-        
-        @keyframes typingAnimation {
-            0%, 60%, 100% { transform: translateY(0); }
-            30% { transform: translateY(-5px); }
-        }
-        
-        .ai-chat-input {
-            display: flex;
-            padding: 10px;
-            border-top: 1px solid var(--primary);
-            background-color: var(--dark);
-        }
-        
-        .ai-chat-input input {
-            flex-grow: 1;
-            background: transparent;
-            border: none;
-            color: var(--light);
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 0.9rem;
-            outline: none;
-        }
-        
-        .ai-chat-send {
-            background: transparent;
-            border: none;
+            justify-content: center;
+            background: rgba(5, 5, 5, 0.8);
             color: var(--primary);
+            border: 1px solid var(--primary);
             cursor: pointer;
+            transition: all 0.3s;
         }
-        
-        /* Particles Background */
-        #particles-js {
-            position: fixed;
-            top: 0;
-            left: 0;
+
+        .media-btn:hover {
+            background: var(--primary);
+            color: var(--dark);
+        }
+
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            border-radius: 5px;
+            overflow: hidden;
+            height: 200px;
+            border: 1px solid var(--gray);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            border-color: var(--primary);
+        }
+
+        .gallery-item img {
             width: 100%;
             height: 100%;
-            z-index: -1;
+            object-fit: cover;
         }
 
+        /* Video Gallery */
+        .video-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .video-item {
+            background: rgba(10, 10, 10, 0.7);
+            border-radius: 5px;
+            overflow: hidden;
+            border: 1px solid var(--gray);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .video-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .video-player {
+            width: 100%;
+            height: 250px;
+            background: var(--darker);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 3rem;
+        }
+
+        .video-content {
+            padding: 20px;
+        }
+
+        .video-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
+            .hero h1 {
+                font-size: 2.5rem;
             }
             
-            .tagline {
-                font-size: 1rem;
+            .hero h2 {
+                font-size: 1.5rem;
             }
             
-            nav {
-                gap: 1rem;
+            nav ul {
+                display: none;
             }
             
-            section {
-                padding: 1rem;
-            }
-
-            .terminal-window {
-                width: 95%;
-            }
-
-            .audio-track {
-                flex-direction: column;
-                align-items: flex-start;
+            .mobile-menu-btn {
+                display: block;
             }
             
-            .ai-chat-window {
-                width: 280px;
-                height: 350px;
+            .floating-buttons {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .datetime {
+                bottom: 20px;
+                left: 20px;
+            }
+            
+            .media-controls {
+                top: 80px;
+                right: 20px;
+            }
+            
+            .video-gallery {
+                grid-template-columns: 1fr;
             }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div id="loading-screen">
-        <div class="loading-terminal">
-            <div class="terminal-bar">
-                <div class="terminal-controls">
-                    <div class="control close"></div>
-                    <div class="control minimize"></div>
-                    <div class="control maximize"></div>
-                </div>
-                <div class="terminal-title">system@boot:~</div>
-                <div></div>
-            </div>
-            <div class="terminal-content">
-                <p>Initializing system...</p>
-                <p>Loading security protocols...</p>
-                <p>Establishing secure connection...</p>
-                <p>Welcome to Arnab Das Portfolio</p>
-            </div>
-            <div class="loading-bar">
-                <div class="loading-progress" id="loading-progress"></div>
-            </div>
-            <div class="loading-text" id="loading-text">Booting system... 0%</div>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-text">INITIALIZING SYSTEM...</div>
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
         </div>
     </div>
-    
-    <div class="terminal-bar">
-        <div class="terminal-controls">
-            <div class="control close"></div>
-            <div class="control minimize"></div>
-            <div class="control maximize"></div>
-        </div>
-        <div class="terminal-title">arnab@das:~</div>
-        <div></div>
-    </div>
-    
+
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
+    <!-- Header -->
     <header>
-        <canvas id="matrix" class="matrix-bg"></canvas>
-        <div id="particles-js"></div>
-        <img src="https://files.catbox.moe/ps57ym.jpg" alt="Arnab Das" class="profile-img">
-        <h1>ARNAB DAS</h1>
-        <p class="tagline">Ethical Hacker | Security Researcher | Penetration Tester</p>
-        <p><span class="typing-text">$ whoami</span></p>
+        <div class="logo">ARNAB_DAS</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
     </header>
-    
-    <nav>
-        <a href="https://arnabhacker.vercel.app/">Website</a>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#blog">Blog</a>
-        <a href="#media">Media</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#contact">Contact</a>
-    </nav>
-    
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>ARNAB DAS</h1>
+            <h2>Ethical Hacker & Cybersecurity Specialist</h2>
+            <p>I secure digital systems by thinking like a hacker. With expertise in penetration testing, vulnerability assessment, and security architecture, I help organizations protect their assets from cyber threats.</p>
+            <a href="https://arnabhacker.vercel.app/" class="btn">Get In Touch</a>
+            <a href="#projects" class="btn">View My Work</a>
+        </div>
+    </section>
+
+    <!-- Terminal Section -->
+    <section>
+        <div class="terminal-container">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <div class="terminal-button close"></div>
+                    <div class="terminal-button minimize"></div>
+                    <div class="terminal-button maximize"></div>
+                </div>
+                <div class="terminal-title">terminal — bash — 80x24</div>
+            </div>
+            <div class="terminal-body" id="terminal-body">
+                <!-- Terminal content will be added by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
     <section id="about">
-        <h2>About Me</h2>
-        <p>Welcome to my digital domain. I'm Arnab Das, a cybersecurity professional with a passion for ethical hacking and securing digital infrastructures.</p>
-        <p>With years of experience in penetration testing, vulnerability assessment, and security research, I help organizations identify and mitigate security risks before they can be exploited by malicious actors.</p>
-        <p>My philosophy: <span class="command">"To beat a hacker, you need to think like one."</span></p>
-        
-        <!-- Interactive Terminal Introduction -->
-        <div class="code-editor">
-            <div class="editor-header">
-                <div class="editor-title">terminal_intro.sh</div>
-                <div class="editor-controls">
-                    <div class="editor-control close"></div>
-                    <div class="editor-control minimize"></div>
-                    <div class="editor-control maximize"></div>
-                </div>
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <div class="profile-img">
+                <img src="https://files.catbox.moe/sprwxe.jpg" alt="ARNAB DAS">
             </div>
-            <div class="editor-content">
-                <div class="code-line"><span class="code-comment">#!/bin/bash</span></div>
-                <div class="code-line"><span class="code-comment"># Interactive Introduction Script</span></div>
-                <div class="code-line"></div>
-                <div class="code-line"><span class="code-function">echo</span> <span class="code-string">"Initializing security protocols..."</span></div>
-                <div class="code-line"><span class="code-function">sleep</span> 1</div>
-                <div class="code-line"><span class="code-function">echo</span> <span class="code-string">"Welcome to my cybersecurity portfolio"</span></div>
-                <div class="code-line"><span class="code-function">sleep</span> 1</div>
-                <div class="code-line"><span class="code-function">echo</span> <span class="code-string">"I specialize in:"</span></div>
-                <div class="code-line"><span class="code-function">echo</span> <span class="code-string">"- Penetration Testing"</span></div>
-                <div class="code-line"><span class="code-function">echo</span> <span class="code-string">"- Vulnerability Assessment"</span></div>
-                <div class="code-line"><span class="code-function">echo</span> <span class="code-string">"- Security Research"</span></div>
-                <div class="code-line"><span class="code-function">echo</span> <span class="code-string">"- Digital Forensics"</span></div>
-                <div class="code-line"><span class="code-function">sleep</span> 2</div>
-                <div class="code-line"><span class="code-function">echo</span> <span class="code-string">"System ready. Explore my work below."</span></div>
+            <div class="about-text">
+                <h3>Cybersecurity Enthusiast from Kolkata, India</h3>
+                <p>I'm ARNAB DAS, an ethical hacker and cybersecurity specialist with a passion for identifying vulnerabilities and strengthening digital defenses. My journey in cybersecurity began 5 years ago, and since then I've been dedicated to understanding how systems can be compromised to better protect them.</p>
+                <p>I specialize in penetration testing, network security, web application security, and digital forensics. My approach combines technical expertise with creative problem-solving to uncover security weaknesses that others might miss.</p>
+                <p>When I'm not hacking (ethically, of course), I contribute to open-source security tools, write about cybersecurity trends, and help organizations build more resilient security postures.</p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Kolkata, India</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+91 6291442697</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>arnabdas78@gmail.com</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-    
+
+    <!-- Skills Section -->
     <section id="skills">
-        <h2>My Skills</h2>
-        <p><span class="command">$ skills --matrix</span></p>
-        
-        <div class="skills-grid">
-            <div class="skill-item">
-                <div class="skill-header">
-                    <i class="fas fa-shield-alt skill-icon"></i>
-                    <span class="skill-name">Penetration Testing</span>
-                </div>
-                <div class="skill-bar">
-                    <div class="skill-progress" data-width="95"></div>
-                </div>
-            </div>
-            <div class="skill-item">
-                <div class="skill-header">
-                    <i class="fas fa-bug skill-icon"></i>
-                    <span class="skill-name">Vulnerability Assessment</span>
-                </div>
-                <div class="skill-bar">
-                    <div class="skill-progress" data-width="90"></div>
+        <h2 class="section-title">Skills Matrix</h2>
+        <div class="skills-container">
+            <div class="skill-category">
+                <h3><i class="fas fa-shield-alt"></i> Penetration Testing</h3>
+                <div class="skill-items">
+                    <div class="skill-item">Network Pentesting</div>
+                    <div class="skill-item">Web App Pentesting</div>
+                    <div class="skill-item">Mobile App Pentesting</div>
+                    <div class="skill-item">Wireless Security</div>
+                    <div class="skill-item">Social Engineering</div>
                 </div>
             </div>
-            <div class="skill-item">
-                <div class="skill-header">
-                    <i class="fas fa-code skill-icon"></i>
-                    <span class="skill-name">Reverse Engineering</span>
-                </div>
-                <div class="skill-bar">
-                    <div class="skill-progress" data-width="85"></div>
-                </div>
-            </div>
-            <div class="skill-item">
-                <div class="skill-header">
-                    <i class="fas fa-virus skill-icon"></i>
-                    <span class="skill-name">Malware Analysis</span>
-                </div>
-                <div class="skill-bar">
-                    <div class="skill-progress" data-width="80"></div>
+            <div class="skill-category">
+                <h3><i class="fas fa-code"></i> Development</h3>
+                <div class="skill-items">
+                    <div class="skill-item">Python</div>
+                    <div class="skill-item">JavaScript</div>
+                    <div class="skill-item">Bash Scripting</div>
+                    <div class="skill-item">PHP</div>
+                    <div class="skill-item">SQL</div>
                 </div>
             </div>
-            <div class="skill-item">
-                <div class="skill-header">
-                    <i class="fas fa-search skill-icon"></i>
-                    <span class="skill-name">Digital Forensics</span>
-                </div>
-                <div class="skill-bar">
-                    <div class="skill-progress" data-width="85"></div>
-                </div>
-            </div>
-            <div class="skill-item">
-                <div class="skill-header">
-                    <i class="fas fa-lock skill-icon"></i>
-                    <span class="skill-name">Cryptography</span>
-                </div>
-                <div class="skill-bar">
-                    <div class="skill-progress" data-width="75"></div>
+            <div class="skill-category">
+                <h3><i class="fas fa-tools"></i> Tools</h3>
+                <div class="skill-items">
+                    <div class="skill-item">Metasploit</div>
+                    <div class="skill-item">Burp Suite</div>
+                    <div class="skill-item">Wireshark</div>
+                    <div class="skill-item">Nmap</div>
+                    <div class="skill-item">John the Ripper</div>
                 </div>
             </div>
-            <div class="skill-item">
-                <div class="skill-header">
-                    <i class="fas fa-network-wired skill-icon"></i>
-                    <span class="skill-name">Network Security</span>
-                </div>
-                <div class="skill-bar">
-                    <div class="skill-progress" data-width="90"></div>
-                </div>
-            </div>
-            <div class="skill-item">
-                <div class="skill-header">
-                    <i class="fas fa-tools skill-icon"></i>
-                    <span class="skill-name">Security Tool Development</span>
-                </div>
-                <div class="skill-bar">
-                    <div class="skill-progress" data-width="85"></div>
+            <div class="skill-category">
+                <h3><i class="fas fa-network-wired"></i> Network Security</h3>
+                <div class="skill-items">
+                    <div class="skill-item">Firewalls</div>
+                    <div class="skill-item">IDS/IPS</div>
+                    <div class="skill-item">VPN</div>
+                    <div class="skill-item">SIEM</div>
+                    <div class="skill-item">Cryptography</div>
                 </div>
             </div>
         </div>
     </section>
-    
+
+    <!-- Projects Section -->
     <section id="projects">
-        <h2>Notable Projects</h2>
-        <p><span class="command">$ ls -la projects/</span></p>
-        
+        <h2 class="section-title">Projects</h2>
         <div class="projects-grid">
             <div class="project-card">
-                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="SecureAuth Framework" class="project-image">
+                <div class="project-img">
+                    <i class="fas fa-lock"></i>
+                </div>
                 <div class="project-content">
-                    <h3 class="project-title">SecureAuth Framework</h3>
-                    <p class="project-description">Developed a multi-factor authentication system resistant to common attacks with advanced security features.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Cryptography</span>
-                        <span class="tech-tag">OAuth</span>
-                    </div>
+                    <h3>Vulnerability Scanner</h3>
+                    <p>A custom vulnerability scanner built with Python that identifies security weaknesses in web applications and networks.</p>
                     <div class="project-links">
-                        <a href="#" class="project-link"><i class="fab fa-github"></i> Source Code</a>
-                        <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                        <a href="#">View Demo</a>
+                        <a href="https://github.com/arnabdas789">Source Code</a>
                     </div>
                 </div>
             </div>
             <div class="project-card">
-                <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="VulnScan Pro" class="project-image">
+                <div class="project-img">
+                    <i class="fas fa-user-secret"></i>
+                </div>
                 <div class="project-content">
-                    <h3 class="project-title">VulnScan Pro</h3>
-                    <p class="project-description">Automated vulnerability scanner with advanced detection capabilities and comprehensive reporting.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Nmap</span>
-                        <span class="tech-tag">Metasploit</span>
-                    </div>
+                    <h3>Password Cracking Tool</h3>
+                    <p>An advanced password cracking utility with support for multiple attack vectors and hash types.</p>
                     <div class="project-links">
-                        <a href="#" class="project-link"><i class="fab fa-github"></i> Source Code</a>
-                        <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Documentation</a>
+                        <a href="#">View Demo</a>
+                        <a href="https://github.com/arnabdas789">Source Code</a>
                     </div>
                 </div>
             </div>
             <div class="project-card">
-                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="CryptoShield" class="project-image">
+                <div class="project-img">
+                    <i class="fas fa-network-wired"></i>
+                </div>
                 <div class="project-content">
-                    <h3 class="project-title">CryptoShield</h3>
-                    <p class="project-description">Encryption tool with military-grade algorithms and user-friendly interface for secure communications.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">C++</span>
-                        <span class="tech-tag">AES</span>
-                        <span class="tech-tag">RSA</span>
-                    </div>
+                    <h3>Network Monitoring System</h3>
+                    <p>A real-time network monitoring solution with intrusion detection capabilities and alerting system.</p>
                     <div class="project-links">
-                        <a href="#" class="project-link"><i class="fab fa-github"></i> Source Code</a>
-                        <a href="#" class="project-link"><i class="fas fa-download"></i> Download</a>
+                        <a href="#">View Demo</a>
+                        <a href="https://github.com/arnabdas789">Source Code</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="blog">
-        <h2>Security Blog</h2>
-        <p><span class="command">$ cat blog/latest.txt</span></p>
+    <!-- Gallery Section -->
+    <section id="gallery">
+        <h2 class="section-title">Hacking Gallery</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://files.catbox.moe/sprwxe.jpg" alt="Hacking Image 1">
+            </div>
+            <div class="gallery-item">
+                <img src="https://files.catbox.moe/s8ud8j.jpg" alt="Hacking Image 2">
+            </div>
+            <div class="gallery-item">
+                <img src="https://files.catbox.moe/1jubyf.jpg" alt="Hacking Image 3">
+            </div>
+            <div class="gallery-item">
+                <img src="https://files.catbox.moe/ckrlzs.jpg" alt="Hacking Image 4">
+            </div>
+            <div class="gallery-item">
+                <img src="https://files.catbox.moe/ojamk7.jpg" alt="Hacking Image 5">
+            </div>
+            <div class="gallery-item">
+                <img src="https://files.catbox.moe/luzyrg.jpg" alt="Hacking Image 6">
+            </div>
+            <div class="gallery-item">
+                <img src="https://files.catbox.moe/egve7u.jpg" alt="Hacking Image 7">
+            </div>
+            <div class="gallery-item">
+                <img src="https://files.catbox.moe/5odcpg.jpg" alt="Hacking Image 8">
+            </div>
+            <div class="gallery-item">
+                <img src="https://files.catbox.moe/psx74y.jpg" alt="Hacking Image 9">
+            </div>
+        </div>
         
+        <h2 class="section-title" style="margin-top: 80px;">Hacking Videos</h2>
+        <div class="video-gallery">
+            <div class="video-item">
+                <div class="video-player">
+                    <i class="fas fa-play"></i>
+                </div>
+                <div class="video-content">
+                    <h3>Network Penetration Testing</h3>
+                    <p>Demonstration of network security assessment techniques and vulnerability identification.</p>
+                </div>
+            </div>
+            <div class="video-item">
+                <div class="video-player">
+                    <i class="fas fa-play"></i>
+                </div>
+                <div class="video-content">
+                    <h3>Web Application Security</h3>
+                    <p>Exploring common web vulnerabilities and how to exploit them ethically.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Editor Section -->
+    <section>
+        <h2 class="section-title">Live Code Editor</h2>
+        <div class="code-editor-container">
+            <div class="code-editor-header">
+                <div class="code-editor-title">editor.py</div>
+                <div class="terminal-buttons">
+                    <div class="terminal-button close"></div>
+                    <div class="terminal-button minimize"></div>
+                    <div class="terminal-button maximize"></div>
+                </div>
+            </div>
+            <div class="code-editor-body">
+                <textarea class="code-editor" id="code-editor">#!/usr/bin/env python3
+# Simple Port Scanner
+
+import socket
+import threading
+from queue import Queue
+
+print("ARNAB DAS - Port Scanner")
+target = input("Enter target IP: ")
+
+def port_scan(port):
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.settimeout(1)
+        result = sock.connect_ex((target, port))
+        if result == 0:
+            print(f"Port {port}: Open")
+        sock.close()
+    except Exception:
+        pass
+
+# Scan common ports
+for port in range(1, 1025):
+    thread = threading.Thread(target=port_scan, args=(port,))
+    thread.start()</textarea>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog">
+        <h2 class="section-title">Blog & Articles</h2>
         <div class="blog-grid">
             <div class="blog-card">
-                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Web Application Security" class="blog-image">
+                <div class="blog-img">
+                    <i class="fas fa-bug"></i>
+                </div>
                 <div class="blog-content">
-                    <h3 class="blog-title">Advanced Web Application Penetration Testing</h3>
-                    <p class="blog-excerpt">Learn advanced techniques for identifying and exploiting vulnerabilities in modern web applications.</p>
+                    <h3>Common Web Vulnerabilities in 2023</h3>
+                    <p>An overview of the most prevalent web application security vulnerabilities and how to mitigate them.</p>
                     <div class="blog-meta">
-                        <span>May 15, 2025</span>
+                        <span>June 15, 2026</span>
+                        <span>5 min read</span>
+                    </div>
+                </div>
+            </div>
+            <div class="blog-card">
+                <div class="blog-img">
+                    <i class="fas fa-key"></i>
+                </div>
+                <div class="blog-content">
+                    <h3>Password Security Best Practices</h3>
+                    <p>Exploring modern password security techniques and why traditional approaches are no longer sufficient.</p>
+                    <div class="blog-meta">
+                        <span>May 28, 2026</span>
+                        <span>7 min read</span>
+                    </div>
+                </div>
+            </div>
+            <div class="blog-card">
+                <div class="blog-img">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="blog-content">
+                    <h3>Building a Home Lab for Security Testing</h3>
+                    <p>A guide to setting up your own cybersecurity lab for practicing ethical hacking techniques safely.</p>
+                    <div class="blog-meta">
+                        <span>April 10, 2026</span>
                         <span>10 min read</span>
                     </div>
-                    <a href="#" class="blog-link">Read More →</a>
-                </div>
-            </div>
-            <div class="blog-card">
-                <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Malware Analysis" class="blog-image">
-                <div class="blog-content">
-                    <h3 class="blog-title">Malware Analysis Fundamentals</h3>
-                    <p class="blog-excerpt">A comprehensive guide to analyzing malicious software and understanding its behavior.</p>
-                    <div class="blog-meta">
-                        <span>April 28, 2025</span>
-                        <span>15 min read</span>
-                    </div>
-                    <a href="#" class="blog-link">Read More →</a>
-                </div>
-            </div>
-            <div class="blog-card">
-                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Cryptography" class="blog-image">
-                <div class="blog-content">
-                    <h3 class="blog-title">Modern Cryptography in Cybersecurity</h3>
-                    <p class="blog-excerpt">Exploring the role of cryptography in securing digital communications and data.</p>
-                    <div class="blog-meta">
-                        <span>March 12, 2025</span>
-                        <span>12 min read</span>
-                    </div>
-                    <a href="#" class="blog-link">Read More →</a>
                 </div>
             </div>
         </div>
     </section>
-    
-    <section id="media">
-        <h2>Media</h2>
-        
-        <div class="music-player">
-            <h3>Hacking Soundtracks</h3>
-            <div class="audio-controls">
-                <div class="audio-track">
-                    <span>Cyberpunk Theme:</span>
-                    <audio controls loop>
-                        <source src="https://files.catbox.moe/5zf4p2.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
-                <div class="audio-track">
-                    <span>Digital Warfare:</span>
-                    <audio controls>
-                        <source src="https://files.catbox.moe/7mcrij.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
-            </div>
-        </div>
 
-        <div class="local-video-container">
-            <h3>Security Demonstration</h3>
-            <div class="video-container">
-                <video controls>
-                    <source src="https://files.catbox.moe/ucj1dp.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-        </div>
-    </section>
-    
-    <section id="gallery">
-        <h2>Hacking Gallery</h2>
-        <div class="gallery">
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Hacking Setup">
-                <div class="gallery-caption">My Hacking Setup</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Code Screen">
-                <div class="gallery-caption">Reverse Engineering Session</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Security Conference">
-                <div class="gallery-caption">Speaking at DEF CON</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Cyber Security">
-                <div class="gallery-caption">Security Research</div>
-            </div>
-        </div>
-    </section>
-    
+    <!-- Contact Section -->
     <section id="contact">
-        <h2>Contact & Social</h2>
-        <p>Want to discuss security, collaborate on a project, or need consultation?</p>
-        <p><span class="command">$ contact --social</span></p>
-        
-        <div class="social-links">
-            <a href="https://www.facebook.com/share/1B7tMJL2Nd/" class="social-link" target="_blank">
-                <i class="fab fa-facebook"></i> Facebook
-            </a>
-            <a href="https://github.com/arnabdas789" class="social-link" target="_blank">
-                <i class="fab fa-github"></i> GitHub
-            </a>
-            <a href="https://in.linkedin.com/in/arnab-das-86327336b" class="social-link" target="_blank">
-                <i class="fab fa-linkedin"></i> LinkedIn
-            </a>
-            <a href="https://instagram.com/arnab_086" class="social-link" target="_blank">
-                <i class="fab fa-instagram"></i> Instagram
-            </a>
-            <a href="mailto:das742811@gmail.com" class="social-link">
-                <i class="fas fa-envelope"></i> Email
-            </a>
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+91 6291442697</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>arnabdas78@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Kolkata, India</span>
+                    </div>
+                </div>
+                <h3>Follow Me</h3>
+                <div class="social-links">
+                    <a href="https://github.com/arnabdas789" class="social-link" target="_blank">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.facebook.com/share/1B7tMJL2Nd/" class="social-link" target="_blank">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.instagram.com/arnabdas789/" class="social-link" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://whatsapp.com/channel/0029VaGyP933bbVC7G0x0i2T" class="social-link" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
         </div>
     </section>
-    
+
+    <!-- Footer -->
     <footer>
-        <p>© 2025 Arnab Das. All rights reserved.</p>
-        <p>Last login: <span id="datetime"></span> from 192.168.1.101</p>
-        <p class="blink">_</p>
+        <div class="footer-content">
+            <div class="footer-logo">ARNAB_DAS</div>
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#blog">Blog</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 ARNAB DAS. All rights reserved. | Ethical Hacker Portfolio
+        </div>
     </footer>
 
-    <!-- Terminal Window -->
-    <div class="overlay" id="terminal-overlay"></div>
-    <div class="terminal-window" id="terminal-window">
-        <div class="terminal-bar">
-            <div class="terminal-controls">
-                <div class="control close" id="terminal-close"></div>
-                <div class="control minimize"></div>
-                <div class="control maximize"></div>
-            </div>
-            <div class="terminal-title">terminal@arnab:~</div>
-            <div></div>
-        </div>
-        <div class="terminal-content" id="terminal-content">
-            <p>Welcome to Arnab's interactive terminal!</p>
-            <p>Type 'help' to see available commands.</p>
-            <p>> <span id="terminal-output"></span></p>
-        </div>
-        <div class="terminal-input">
-            <span class="terminal-prompt">$</span>
-            <input type="text" id="terminal-command" autocomplete="off" placeholder="Type command...">
-        </div>
+    <!-- Floating Buttons -->
+    <div class="floating-buttons">
+        <button class="floating-btn whatsapp-btn" id="whatsapp-btn">
+            <i class="fab fa-whatsapp"></i>
+        </button>
+        <button class="floating-btn ai-btn" id="ai-btn">
+            <i class="fas fa-robot"></i>
+        </button>
     </div>
 
-    <!-- Terminal Toggle Button -->
-    <div class="terminal-toggle" id="terminal-toggle">
-        <i class="fas fa-terminal"></i>
+    <!-- Date & Time -->
+    <div class="datetime" id="datetime"></div>
+
+    <!-- Media Controls -->
+    <div class="media-controls">
+        <button class="media-btn" id="play-music">
+            <i class="fas fa-music"></i>
+        </button>
+        <button class="media-btn" id="play-video">
+            <i class="fas fa-video"></i>
+        </button>
     </div>
 
-    <!-- WhatsApp Float Button -->
-    <a href="https://wa.me/916291442697" class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-    
-    <!-- AI Assistant Button -->
-    <div class="ai-assistant" id="ai-assistant">
-        <i class="fas fa-robot"></i>
-    </div>
-    
-    <!-- AI Chat Window -->
-    <div class="ai-chat-window" id="ai-chat-window">
-        <div class="ai-chat-header">
-            <div class="ai-chat-title">Security Assistant</div>
-            <div class="ai-chat-close" id="ai-chat-close">
-                <i class="fas fa-times"></i>
-            </div>
-        </div>
-        <div class="ai-chat-messages" id="ai-chat-messages">
-            <div class="ai-message ai-message-bot">
-                Hello! I'm your security assistant. I can help with cybersecurity questions, tools, and career advice. How can I assist you today?
-            </div>
-        </div>
-        <div class="ai-chat-input">
-            <input type="text" id="ai-chat-input" placeholder="Ask me about security...">
-            <button class="ai-chat-send" id="ai-chat-send">
-                <i class="fas fa-paper-plane"></i>
-            </button>
-        </div>
+    <!-- Audio Elements -->
+    <audio id="bg-music" loop>
+        <source src="https://files.catbox.moe/5zf4p2.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Video Modal -->
+    <div id="video-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; justify-content: center; align-items: center;">
+        <video id="bg-video" controls style="max-width: 90%; max-height: 90%;">
+            <source src="https://files.catbox.moe/ucj1dp.mp4" type="video/mp4">
+        </video>
+        <button id="close-video" style="position: absolute; top: 20px; right: 20px; background: none; border: none; color: white; font-size: 2rem; cursor: pointer;">×</button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Loading screen functionality
-        const loadingScreen = document.getElementById('loading-screen');
-        const loadingProgress = document.getElementById('loading-progress');
-        const loadingText = document.getElementById('loading-text');
-        
-        let progress = 0;
-        const loadingInterval = setInterval(() => {
-            progress += Math.random() * 10;
-            if (progress > 100) progress = 100;
-            
-            loadingProgress.style.width = `${progress}%`;
-            loadingText.textContent = `Booting system... ${Math.floor(progress)}%`;
-            
-            if (progress === 100) {
-                clearInterval(loadingInterval);
-                setTimeout(() => {
-                    loadingScreen.style.opacity = '0';
-                    setTimeout(() => {
-                        loadingScreen.style.display = 'none';
+        // Preloader
+        window.addEventListener('load', function() {
+            const progress = document.getElementById('progress');
+            let width = 0;
+            const interval = setInterval(function() {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    setTimeout(function() {
+                        document.getElementById('preloader').style.display = 'none';
                     }, 500);
-                }, 500);
-            }
-        }, 200);
-        
-        // Matrix background effect
-        const canvas = document.getElementById('matrix');
-        const ctx = canvas.getContext('2d');
-        
-        canvas.width = canvas.offsetWidth;
-        canvas.height = canvas.offsetHeight;
-        
-        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
-        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        const nums = '0123456789';
-        const symbols = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
-        
-        const alphabet = katakana + latin + nums + symbols;
-        
-        const fontSize = 16;
-        const columns = canvas.width / fontSize;
-        
-        const rainDrops = [];
-        
-        for (let x = 0; x < columns; x++) {
-            rainDrops[x] = 1;
-        }
-        
-        const draw = () => {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            ctx.fillStyle = '#0f0';
-            ctx.font = fontSize + 'px monospace';
-            
-            for (let i = 0; i < rainDrops.length; i++) {
-                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
-                
-                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    rainDrops[i] = 0;
+                } else {
+                    width++;
+                    progress.style.width = width + '%';
                 }
-                rainDrops[i]++;
-            }
-        };
-        
-        setInterval(draw, 30);
-        
-        // Particles.js background
+            }, 30);
+        });
+
+        // Particles.js
         particlesJS('particles-js', {
             particles: {
                 number: { value: 80, density: { enable: true, value_area: 800 } },
-                color: { value: "#0f0" },
+                color: { value: "#00ff41" },
                 shape: { type: "circle" },
                 opacity: { value: 0.5, random: true },
                 size: { value: 3, random: true },
                 line_linked: {
                     enable: true,
                     distance: 150,
-                    color: "#0f0",
+                    color: "#00ff41",
                     opacity: 0.4,
                     width: 1
                 },
@@ -1437,311 +1358,131 @@
                 }
             }
         });
-        
-        // Update datetime
+
+        // Terminal Animation
+        const terminalBody = document.getElementById('terminal-body');
+        const terminalLines = [
+            { text: "Welcome to ARNAB DAS Ethical Hacker Portfolio", delay: 500 },
+            { text: "Initializing security protocols...", delay: 800 },
+            { text: "Scanning system for vulnerabilities...", delay: 800 },
+            { text: "System secure. All firewalls active.", delay: 800 },
+            { text: "> whoami", delay: 500 },
+            { text: "arnab_das | ethical_hacker | cybersecurity_specialist", delay: 800 },
+            { text: "> skills --list", delay: 500 },
+            { text: "Penetration Testing | Network Security | Web App Security | Digital Forensics", delay: 800 },
+            { text: "> location", delay: 500 },
+            { text: "Kolkata, India", delay: 800 },
+            { text: "> contact --methods", delay: 500 },
+            { text: "Email: arnabdas78@gmail.com | Phone: +91 6291442697", delay: 800 },
+            { text: "> social --links", delay: 500 },
+            { text: "GitHub: arnabdas789 | Instagram: arnabdas789", delay: 800 },
+            { text: "> _", delay: 2000, cursor: true }
+        ];
+
+        let lineIndex = 0;
+        function typeTerminalLine() {
+            if (lineIndex < terminalLines.length) {
+                const line = terminalLines[lineIndex];
+                setTimeout(() => {
+                    const lineElement = document.createElement('div');
+                    lineElement.className = 'terminal-line';
+                    
+                    if (line.text.startsWith(">")) {
+                        lineElement.innerHTML = `<span class="terminal-prompt">${line.text}</span>`;
+                    } else {
+                        lineElement.textContent = line.text;
+                    }
+                    
+                    if (line.cursor) {
+                        lineElement.innerHTML += '<span class="terminal-cursor"></span>';
+                    }
+                    
+                    terminalBody.appendChild(lineElement);
+                    terminalBody.scrollTop = terminalBody.scrollHeight;
+                    
+                    lineIndex++;
+                    typeTerminalLine();
+                }, line.delay);
+            }
+        }
+
+        // Start terminal animation after preloader
+        setTimeout(typeTerminalLine, 2000);
+
+        // Date and Time
         function updateDateTime() {
             const now = new Date();
-            const datetime = now.toLocaleString('en-US', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
                 day: 'numeric',
                 hour: '2-digit',
                 minute: '2-digit',
                 second: '2-digit'
-            });
-            document.getElementById('datetime').textContent = datetime;
+            };
+            document.getElementById('datetime').textContent = now.toLocaleDateString('en-US', options);
         }
-        
         setInterval(updateDateTime, 1000);
         updateDateTime();
-        
-        // Typewriter effect
-        const phrases = [
-            "whoami",
-            "uname -a",
-            "ifconfig",
-            "netstat -tulnp",
-            "ps aux",
-            "ls -la",
-            "cd ~",
-            "sudo !!",
-            "nmap -sV -O target.com",
-            "hydra -l user -P passlist.txt ssh://target"
-        ];
-        
-        let currentPhrase = 0;
-        let currentChar = 0;
-        let isDeleting = false;
-        const typingElement = document.querySelector('.typing-text');
-        
-        function type() {
-            const fullPhrase = phrases[currentPhrase];
-            
-            if (isDeleting) {
-                typingElement.textContent = fullPhrase.substring(0, currentChar - 1);
-                currentChar--;
+
+        // WhatsApp Button
+        document.getElementById('whatsapp-btn').addEventListener('click', function() {
+            window.open('https://wa.me/923027844697?text=Hello%20ARNAB%20HACKER%20I%20need%20your%20help%20my%20name%20is%20___', '_blank');
+        });
+
+        // AI Assistant Button
+        document.getElementById('ai-btn').addEventListener('click', function() {
+            window.open('https://tohidai.vercel.app', '_blank');
+        });
+
+        // Music System
+        const bgMusic = document.getElementById('bg-music');
+        const playMusicBtn = document.getElementById('play-music');
+        let musicPlaying = false;
+
+        playMusicBtn.addEventListener('click', function() {
+            if (musicPlaying) {
+                bgMusic.pause();
+                playMusicBtn.innerHTML = '<i class="fas fa-music"></i>';
             } else {
-                typingElement.textContent = fullPhrase.substring(0, currentChar + 1);
-                currentChar++;
+                bgMusic.play();
+                playMusicBtn.innerHTML = '<i class="fas fa-pause"></i>';
             }
-            
-            if (!isDeleting && typingElement.textContent === fullPhrase) {
-                isDeleting = true;
-                setTimeout(type, 2000);
-            } else if (isDeleting && typingElement.textContent === '') {
-                isDeleting = false;
-                currentPhrase = (currentPhrase + 1) % phrases.length;
-                setTimeout(type, 500);
-            } else {
-                const speed = isDeleting ? 100 : 150;
-                setTimeout(type, speed);
-            }
-        }
-        
-        setTimeout(type, 1000);
-        
-        // Animate skill bars when in viewport
-        const skillProgresses = document.querySelectorAll('.skill-progress');
-        
-        function animateSkills() {
-            skillProgresses.forEach(progress => {
-                const rect = progress.getBoundingClientRect();
-                if (rect.top < window.innerHeight && rect.bottom >= 0) {
-                    const width = progress.getAttribute('data-width');
-                    progress.style.width = `${width}%`;
-                }
+            musicPlaying = !musicPlaying;
+        });
+
+        // Video System
+        const videoModal = document.getElementById('video-modal');
+        const bgVideo = document.getElementById('bg-video');
+        const playVideoBtn = document.getElementById('play-video');
+        const closeVideoBtn = document.getElementById('close-video');
+
+        playVideoBtn.addEventListener('click', function() {
+            videoModal.style.display = 'flex';
+            bgVideo.play();
+        });
+
+        closeVideoBtn.addEventListener('click', function() {
+            videoModal.style.display = 'none';
+            bgVideo.pause();
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
-        }
-        
-        window.addEventListener('scroll', animateSkills);
-        window.addEventListener('load', animateSkills);
-        
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            canvas.width = canvas.offsetWidth;
-            canvas.height = canvas.offsetHeight;
         });
 
-        // Terminal functionality
-        const terminalWindow = document.getElementById('terminal-window');
-        const terminalOverlay = document.getElementById('terminal-overlay');
-        const terminalToggle = document.getElementById('terminal-toggle');
-        const terminalClose = document.getElementById('terminal-close');
-        const terminalCommand = document.getElementById('terminal-command');
-        const terminalOutput = document.getElementById('terminal-output');
-        const terminalContent = document.getElementById('terminal-content');
-
-        // Terminal commands
-        const commands = {
-            help: {
-                description: "Show available commands",
-                execute: () => {
-                    let output = "Available commands:<br>";
-                    for (const cmd in commands) {
-                        output += `${cmd} - ${commands[cmd].description}<br>`;
-                    }
-                    return output;
-                }
-            },
-            clear: {
-                description: "Clear terminal screen",
-                execute: () => {
-                    terminalContent.innerHTML = '<p>Welcome to Arnab\'s interactive terminal!</p><p>Type \'help\' to see available commands.</p>';
-                    return "";
-                }
-            },
-            about: {
-                description: "Show about information",
-                execute: () => {
-                    return "Arnab Das - Ethical Hacker & Security Researcher<br>Specializing in penetration testing and cybersecurity research.";
-                }
-            },
-            skills: {
-                description: "List technical skills",
-                execute: () => {
-                    return "> Penetration Testing<br>> Vulnerability Assessment<br>> Reverse Engineering<br>> Malware Analysis<br>> Digital Forensics";
-                }
-            },
-            contact: {
-                description: "Show contact information",
-                execute: () => {
-                    return "Email: das742811@gmail.com<br>GitHub: github.com/arnabdas789<br>LinkedIn: linkedin.com/in/arnab-das-86327336b";
-                }
-            },
-            social: {
-                description: "Show social media links",
-                execute: () => {
-                    return "Facebook: facebook.com/share/1B7tMJL2Nd/<br>GitHub: github.com/arnabdas789<br>LinkedIn: linkedin.com/in/arnab-das-86327336b<br>Instagram: @arnab_086";
-                }
-            },
-            banner: {
-                description: "Show ASCII art banner",
-                execute: () => {
-                    return `
-                    <pre>
-  ___  _ __ _ __ ___  _ __  
- / _ \\| '__| '__/ _ \\| '__| 
-| (_) | |  | | | (_) | |    
- \\___/|_|  |_|  \\___/|_|    
-                    </pre>
-                    `;
-                }
-            },
-            projects: {
-                description: "Show project information",
-                execute: () => {
-                    return "SecureAuth Framework - Multi-factor authentication system<br>VulnScan Pro - Automated vulnerability scanner<br>CryptoShield - Encryption tool with military-grade algorithms";
-                }
-            }
-        };
-
-        // Terminal toggle
-        terminalToggle.addEventListener('click', () => {
-            terminalWindow.style.display = "flex";
-            terminalOverlay.style.display = "block";
-            terminalCommand.focus();
-        });
-
-        terminalClose.addEventListener('click', () => {
-            terminalWindow.style.display = "none";
-            terminalOverlay.style.display = "none";
-        });
-
-        terminalOverlay.addEventListener('click', () => {
-            terminalWindow.style.display = "none";
-            terminalOverlay.style.display = "none";
-        });
-
-        // Terminal command processing
-        terminalCommand.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                const command = terminalCommand.value.trim().toLowerCase();
-                terminalCommand.value = "";
-                
-                // Add command to history
-                const commandLine = document.createElement('p');
-                commandLine.innerHTML = `$ ${command}`;
-                terminalContent.appendChild(commandLine);
-                
-                // Process command
-                let output = "Command not found. Type 'help' for available commands.";
-                if (commands[command]) {
-                    output = commands[command].execute();
-                }
-                
-                // Add output
-                const outputElement = document.createElement('p');
-                outputElement.innerHTML = output;
-                terminalContent.appendChild(outputElement);
-                
-                // Scroll to bottom
-                terminalContent.scrollTop = terminalContent.scrollHeight;
-            }
-        });
-
-        // AI Assistant functionality
-        const aiAssistant = document.getElementById('ai-assistant');
-        const aiChatWindow = document.getElementById('ai-chat-window');
-        const aiChatClose = document.getElementById('ai-chat-close');
-        const aiChatMessages = document.getElementById('ai-chat-messages');
-        const aiChatInput = document.getElementById('ai-chat-input');
-        const aiChatSend = document.getElementById('ai-chat-send');
-        
-        // Toggle AI chat window
-        aiAssistant.addEventListener('click', () => {
-            if (aiChatWindow.style.display === 'flex') {
-                aiChatWindow.style.display = 'none';
-            } else {
-                aiChatWindow.style.display = 'flex';
-                aiChatInput.focus();
-            }
-        });
-        
-        aiChatClose.addEventListener('click', () => {
-            aiChatWindow.style.display = 'none';
-        });
-        
-        // Create typing indicator
-        function createTypingIndicator() {
-            const typingElement = document.createElement('div');
-            typingElement.className = 'ai-typing';
-            typingElement.innerHTML = `
-                Assistant is typing
-                <div class="ai-typing-dots">
-                    <div class="ai-typing-dot"></div>
-                    <div class="ai-typing-dot"></div>
-                    <div class="ai-typing-dot"></div>
-                </div>
-            `;
-            return typingElement;
-        }
-        
-        // Send message function
-        async function sendMessage() {
-            const message = aiChatInput.value.trim();
-            if (message === '') return;
-            
-            // Add user message
-            const userMessage = document.createElement('div');
-            userMessage.className = 'ai-message ai-message-user';
-            userMessage.textContent = message;
-            aiChatMessages.appendChild(userMessage);
-            
-            // Clear input
-            aiChatInput.value = '';
-            
-            // Scroll to bottom
-            aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
-            
-            // Show typing indicator
-            const typingIndicator = createTypingIndicator();
-            aiChatMessages.appendChild(typingIndicator);
-            aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
-            
-            try {
-                // Call the AI API
-                const apiUrl = `https://ab-hyper-ai.abrahamdw882.workers.dev/?q=${encodeURIComponent(message)}`;
-                const response = await fetch(apiUrl);
-                
-                if (!response.ok) {
-                    throw new Error(`API request failed with status ${response.status}`);
-                }
-                
-                const data = await response.json();
-                
-                // Remove typing indicator
-                aiChatMessages.removeChild(typingIndicator);
-                
-                // Add AI response
-                const botMessage = document.createElement('div');
-                botMessage.className = 'ai-message ai-message-bot';
-                botMessage.textContent = data.response || "I'm sorry, I couldn't process your request. Please try again.";
-                aiChatMessages.appendChild(botMessage);
-                
-            } catch (error) {
-                console.error('Error calling AI API:', error);
-                
-                // Remove typing indicator
-                aiChatMessages.removeChild(typingIndicator);
-                
-                // Add error message
-                const errorMessage = document.createElement('div');
-                errorMessage.className = 'ai-message ai-message-bot';
-                errorMessage.textContent = "I'm experiencing technical difficulties. Please try again later or ask me about cybersecurity topics like penetration testing, vulnerability assessment, or security tools.";
-                aiChatMessages.appendChild(errorMessage);
-            }
-            
-            // Scroll to bottom
-            aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
-        }
-        
-        // Send message on button click or Enter key
-        aiChatSend.addEventListener('click', sendMessage);
-        aiChatInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                sendMessage();
-            }
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            this.reset();
         });
     </script>
 </body>
