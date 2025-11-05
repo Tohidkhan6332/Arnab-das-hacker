@@ -811,11 +811,8 @@
             width: 100%;
             height: 250px;
             background: var(--darker);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            font-size: 3rem;
+            /* Removed flex properties, added object-fit */
+            object-fit: cover; 
         }
 
         .video-content {
@@ -868,7 +865,6 @@
     </style>
 </head>
 <body>
-    <!-- Preloader -->
     <div id="preloader">
         <div class="loader-text">INITIALIZING SYSTEM...</div>
         <div class="progress-bar">
@@ -876,10 +872,8 @@
         </div>
     </div>
 
-    <!-- Particles Background -->
     <div id="particles-js"></div>
 
-    <!-- Header -->
     <header>
         <div class="logo">ARNAB_DAS</div>
         <nav>
@@ -895,7 +889,6 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
             <h1>ARNAB DAS</h1>
@@ -906,7 +899,6 @@
         </div>
     </section>
 
-    <!-- Terminal Section -->
     <section>
         <div class="terminal-container">
             <div class="terminal-header">
@@ -918,12 +910,10 @@
                 <div class="terminal-title">terminal — bash — 80x24</div>
             </div>
             <div class="terminal-body" id="terminal-body">
-                <!-- Terminal content will be added by JavaScript -->
-            </div>
+                </div>
         </div>
     </section>
 
-    <!-- About Section -->
     <section id="about">
         <h2 class="section-title">About Me</h2>
         <div class="about-content">
@@ -953,7 +943,6 @@
         </div>
     </section>
 
-    <!-- Skills Section -->
     <section id="skills">
         <h2 class="section-title">Skills Matrix</h2>
         <div class="skills-container">
@@ -1000,7 +989,6 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
     <section id="projects">
         <h2 class="section-title">Projects</h2>
         <div class="projects-grid">
@@ -1046,7 +1034,6 @@
         </div>
     </section>
 
-    <!-- Gallery Section -->
     <section id="gallery">
         <h2 class="section-title">Hacking Gallery</h2>
         <div class="gallery-grid">
@@ -1082,27 +1069,38 @@
         <h2 class="section-title" style="margin-top: 80px;">Hacking Videos</h2>
         <div class="video-gallery">
             <div class="video-item">
-                <div class="video-player">
-                    <i class="fas fa-play"></i>
-                </div>
+                <video class="video-player" autoplay muted loop playsinline controls>
+                    <source src="https://files.catbox.moe/dwjc0j.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
                 <div class="video-content">
-                    <h3>Network Penetration Testing</h3>
-                    <p>Demonstration of network security assessment techniques and vulnerability identification.</p>
+                    <h3>Hacking Demo 1</h3>
+                    <p>Demonstration of various cybersecurity exploits and defense mechanisms.</p>
                 </div>
             </div>
             <div class="video-item">
-                <div class="video-player">
-                    <i class="fas fa-play"></i>
-                </div>
+                <video class="video-player" autoplay muted loop playsinline controls>
+                    <source src="https://files.catbox.moe/bptbv1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
                 <div class="video-content">
-                    <h3>Web Application Security</h3>
-                    <p>Exploring common web vulnerabilities and how to exploit them ethically.</p>
+                    <h3>Hacking Demo 2</h3>
+                    <p>Exploring system vulnerabilities and penetration testing in a controlled environment.</p>
+                </div>
+            </div>
+            <div class="video-item">
+                <video class="video-player" autoplay muted loop playsinline controls>
+                    <source src="https://files.catbox.moe/prvnpr.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="video-content">
+                    <h3>Hacking Demo 3</h3>
+                    <p>A look at advanced persistent threats and how to mitigate them.</p>
                 </div>
             </div>
         </div>
-    </section>
+        </section>
 
-    <!-- Code Editor Section -->
     <section>
         <h2 class="section-title">Live Code Editor</h2>
         <div class="code-editor-container">
@@ -1144,7 +1142,6 @@ for port in range(1, 1025):
         </div>
     </section>
 
-    <!-- Blog Section -->
     <section id="blog">
         <h2 class="section-title">Blog & Articles</h2>
         <div class="blog-grid">
@@ -1190,7 +1187,6 @@ for port in range(1, 1025):
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact">
         <h2 class="section-title">Get In Touch</h2>
         <div class="contact-container">
@@ -1250,7 +1246,6 @@ for port in range(1, 1025):
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-logo">ARNAB_DAS</div>
@@ -1269,7 +1264,6 @@ for port in range(1, 1025):
         </div>
     </footer>
 
-    <!-- Floating Buttons -->
     <div class="floating-buttons">
         <button class="floating-btn whatsapp-btn" id="whatsapp-btn">
             <i class="fab fa-whatsapp"></i>
@@ -1279,10 +1273,8 @@ for port in range(1, 1025):
         </button>
     </div>
 
-    <!-- Date & Time -->
     <div class="datetime" id="datetime"></div>
 
-    <!-- Media Controls -->
     <div class="media-controls">
         <button class="media-btn" id="play-music">
             <i class="fas fa-music"></i>
@@ -1292,12 +1284,10 @@ for port in range(1, 1025):
         </button>
     </div>
 
-    <!-- Audio Elements -->
     <audio id="bg-music" loop>
         <source src="https://files.catbox.moe/5zf4p2.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Video Modal -->
     <div id="video-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; justify-content: center; align-items: center;">
         <video id="bg-video" controls style="max-width: 90%; max-height: 90%;">
             <source src="https://files.catbox.moe/ucj1dp.mp4" type="video/mp4">
