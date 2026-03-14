@@ -40,7 +40,7 @@
             z-index: -1;
         }
 
-        /* Preloader + Intro Video Overlay */
+        /* Intro Video Overlay - Fullscreen & Audio Fix */
         #intro-overlay {
             position: fixed;
             top: 0;
@@ -59,7 +59,8 @@
         #intro-video {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;  /* Changed from 'cover' to 'contain' for full view without cropping */
+            background: black;     /* Adds black bars to maintain aspect ratio */
             position: absolute;
             top: 0;
             left: 0;
@@ -931,9 +932,9 @@
     </style>
 </head>
 <body>
-    <!-- Intro Video Overlay -->
+    <!-- Intro Video Overlay with Audio and Full View -->
     <div id="intro-overlay">
-        <video id="intro-video" autoplay muted playsinline>
+        <video id="intro-video" autoplay playsinline>  <!-- Removed 'muted' to enable sound -->
             <source src="https://files.catbox.moe/dl1tfr.mp4" type="video/mp4">
         </video>
         <div id="video-progress">
