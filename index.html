@@ -40,7 +40,7 @@
             z-index: -1;
         }
 
-        /* Intro Video Overlay - Fullscreen with Audio */
+        /* Preloader + Intro Video Overlay */
         #intro-overlay {
             position: fixed;
             top: 0;
@@ -59,8 +59,7 @@
         #intro-video {
             width: 100%;
             height: 100%;
-            object-fit: contain;  /* Shows full video without cropping */
-            background: black;
+            object-fit: cover;
             position: absolute;
             top: 0;
             left: 0;
@@ -108,7 +107,7 @@
             color: var(--dark);
         }
 
-        /* Original Preloader (hidden initially) */
+        /* Original Preloader (will be hidden initially) */
         #preloader {
             position: fixed;
             top: 0;
@@ -116,7 +115,7 @@
             width: 100%;
             height: 100%;
             background: var(--darker);
-            display: none;
+            display: none; /* hidden by default, shown after video */
             justify-content: center;
             align-items: center;
             z-index: 9999;
@@ -906,6 +905,10 @@
                 display: none;
             }
             
+            .mobile-menu-btn {
+                display: block;
+            }
+            
             .floating-buttons {
                 bottom: 20px;
                 right: 20px;
@@ -928,7 +931,7 @@
     </style>
 </head>
 <body>
-    <!-- Intro Video Overlay with Auto-play and Audio -->
+    <!-- Intro Video Overlay -->
     <div id="intro-overlay">
         <video id="intro-video" autoplay playsinline>
             <source src="https://files.catbox.moe/dl1tfr.mp4" type="video/mp4">
@@ -939,7 +942,7 @@
         <button id="skip-intro">SKIP INTRO →</button>
     </div>
 
-    <!-- Original Preloader (hidden initially) -->
+    <!-- Original Preloader (now hidden initially) -->
     <div id="preloader">
         <div class="loader-text">INITIALIZING SYSTEM...</div>
         <div class="progress-bar">
@@ -985,7 +988,7 @@
                 <div class="terminal-title">terminal — bash — 80x24</div>
             </div>
             <div class="terminal-body" id="terminal-body">
-            </div>
+                </div>
         </div>
     </section>
 
@@ -1174,7 +1177,7 @@
                 </div>
             </div>
         </div>
-    </section>
+        </section>
 
     <section>
         <h2 class="section-title">Live Code Editor</h2>
@@ -1372,7 +1375,7 @@ for port in range(1, 1025):
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Intro Video Logic - Auto-play with audio
+        // Intro Video Logic
         const introOverlay = document.getElementById('intro-overlay');
         const introVideo = document.getElementById('intro-video');
         const videoProgressBar = document.getElementById('video-progress-bar');
@@ -1382,24 +1385,6 @@ for port in range(1, 1025):
 
         // Disable body scroll while intro plays
         body.style.overflow = 'hidden';
-
-        // Ensure video plays with audio (browser policies may require user interaction first)
-        // Most modern browsers allow autoplay with audio if the video is muted by default, 
-        // but we want audio, so we need to handle this carefully
-        introVideo.volume = 1.0; // Ensure volume is up
-        
-        // Some browsers block autoplay with audio, so we'll try to play and if it fails,
-        // we'll show a message or the user can click skip
-        let playPromise = introVideo.play();
-        
-        if (playPromise !== undefined) {
-            playPromise.catch(error => {
-                // Autoplay with audio was prevented
-                // We'll add a small note to the skip button or just let user click skip
-                console.log("Autoplay with audio blocked by browser");
-                // Optionally show a message, but we'll keep it simple
-            });
-        }
 
         // Update progress bar
         introVideo.addEventListener('timeupdate', function() {
@@ -1413,8 +1398,8 @@ for port in range(1, 1025):
             introOverlay.style.opacity = '0';
             setTimeout(() => {
                 introOverlay.style.display = 'none';
-                preloader.style.display = 'flex';
-                startMainSite();
+                preloader.style.display = 'flex'; // Show original preloader
+                startMainSite(); // Start preloader and terminal etc.
             }, 1000);
         });
 
